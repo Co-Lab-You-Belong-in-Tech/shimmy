@@ -9,8 +9,6 @@ import {app} from './firebase';
 
 const Stack = createNativeStackNavigator();
 
-console.log(app);
-
 export default function App() {
   return (
     <NavigationContainer>
