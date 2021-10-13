@@ -27,7 +27,7 @@ const Time = ({navigation})  => {
     showMode('time');
   };
 
-  const buttonClickedHandler = ({value}) => {
+  const buttonClickedHandler = value => {
     const dateRef = firebase.database().ref("date");
     const date = {
       date: value,
@@ -86,55 +86,75 @@ const Time = ({navigation})  => {
           onChange={onChange}
     />
       <TouchableOpacity
-          onPress={buttonClickedHandler}
+          onPress={() => { 
+          let value = "Sunday";
+          buttonClickedHandler(value);
+          }}
           style={styles.roundButton}
-          defaultValue={"Sunday"}
           >
           <Text>S</Text>
-        </TouchableOpacity>
+      </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={buttonClickedHandler}
+      <TouchableOpacity
+          onPress={() => { 
+          let value = "Monday";
+          buttonClickedHandler(value);
+          }}
           style={styles.roundButton}
-          defaultValue={"Monday"}>
+          >
           <Text>M</Text>
-        </TouchableOpacity>
+      </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={buttonClickedHandler}
+      <TouchableOpacity
+          onPress={() => { 
+          let value = "Tuesday";
+          buttonClickedHandler(value);
+          }}
           style={styles.roundButton}
-          defaultValue={"Tuesday"}>
+          >
           <Text>T</Text>
-        </TouchableOpacity>
+      </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={buttonClickedHandler}
+      <TouchableOpacity
+          onPress={() => { 
+          let value = "Wednesday";
+          buttonClickedHandler(value);
+          }}
           style={styles.roundButton}
-          defaultValue={"Wednesday"}>
+          >
           <Text>W</Text>
-        </TouchableOpacity>
+      </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={buttonClickedHandler}
+      <TouchableOpacity
+          onPress={() => { 
+          let value = "Thursday";
+          buttonClickedHandler(value);
+          }}
           style={styles.roundButton}
-          defaultValue={"Thursday"}>
+          >
           <Text>T</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity
-          onPress={buttonClickedHandler}
-          style={styles.roundButton}
-          defaultValue={"Friday"}>
-          <Text>F</Text>
-        </TouchableOpacity>
+      </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={buttonClickedHandler}
+      <TouchableOpacity
+          onPress={() => { 
+          let value = "Friday";
+          buttonClickedHandler(value);
+          }}
           style={styles.roundButton}
-          defaultValue={"Saturday"}>
+          >
+          <Text>F</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+          onPress={() => { 
+          let value = "Saturday";
+          buttonClickedHandler(value);
+          }}
+          style={styles.roundButton}
+          >
           <Text>S</Text>
-        </TouchableOpacity>
-      </View>
+      </TouchableOpacity>
+        </View>
       <View>
         <Pressable style={styles.button} onPress={showTimepicker}>
           <Text style={styles.buttonText}>Select a Time</Text> 
