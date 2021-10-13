@@ -14,14 +14,6 @@ const Time = ({navigation})  => {
     setDate(currentDate);
   };
 
-  function storeDate(date) {
-      const db = firebase.database();
-      const reference = ref(db, 'users/');
-      set(ref(db, 'users/'), {
-        date: date
-      })
-  }
-
   const showMode = (currentMode) => {
     setShow(true);
     setMode(currentMode);
@@ -35,12 +27,13 @@ const Time = ({navigation})  => {
     showMode('time');
   };
 
-  const buttonClickedHandler = () => {
+  const buttonClickedHandler = ({value}) => {
     console.log('You have been clicked a button!');
-    onValue(reference, (snapshot) => {
-        const date = snapshot.val().date;
-        console.log(date);
-      });
+    const dateRef = firebase.database().ref("date");
+    const date = {
+      date: "testing",
+    }
+    dateRef.push(date)
   };
 
   const styles = StyleSheet.create({
