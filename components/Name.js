@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, Text, Pressable, TextInput, StyleSheet} from 'react-native';
 import firebase from '../firebase';
 
-
 const Name = ({navigation}) => {
     const [text, setText] = useState('')
 
