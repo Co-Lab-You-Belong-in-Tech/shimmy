@@ -28,10 +28,9 @@ const Time = ({navigation})  => {
   };
 
   const buttonClickedHandler = ({value}) => {
-    console.log('You have been clicked a button!');
     const dateRef = firebase.database().ref("date");
     const date = {
-      date: "testing",
+      date: value,
     }
     dateRef.push(date)
   };
@@ -56,25 +55,15 @@ const Time = ({navigation})  => {
     elevation: 3,
     backgroundColor: 'black',
   },
-  roundButton1: {
-    margin: 10,
-    width: 50,
-    height: 50,
+  roundButton: {
+    margin: 15,
+    width: 15,
+    height: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 50,
+    padding: 1,
     borderRadius: 100,
     backgroundColor: 'lightgrey',
-  },
-  roundButton2: {
-    marginTop: 20,
-    width: 150,
-    height: 150,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 4,
-    borderRadius: 100,
-    backgroundColor: '#ccc',
   },
   buttonText: {
     fontSize: 16,
@@ -88,9 +77,17 @@ const Time = ({navigation})  => {
   return (
     <View style={styles.screen}>
     <View style={styles.row}>
+    <DateTimePicker
+          testID="dateTimePicker"
+          display="spinner"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          onChange={onChange}
+    />
       <TouchableOpacity
           onPress={buttonClickedHandler}
-          style={styles.roundButton1}
+          style={styles.roundButton}
           defaultValue={"Sunday"}
           >
           <Text>S</Text>
@@ -98,42 +95,42 @@ const Time = ({navigation})  => {
 
         <TouchableOpacity
           onPress={buttonClickedHandler}
-          style={styles.roundButton1}
+          style={styles.roundButton}
           defaultValue={"Monday"}>
           <Text>M</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={buttonClickedHandler}
-          style={styles.roundButton1}
+          style={styles.roundButton}
           defaultValue={"Tuesday"}>
           <Text>T</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={buttonClickedHandler}
-          style={styles.roundButton1}
+          style={styles.roundButton}
           defaultValue={"Wednesday"}>
           <Text>W</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={buttonClickedHandler}
-          style={styles.roundButton1}
+          style={styles.roundButton}
           defaultValue={"Thursday"}>
           <Text>T</Text>
         </TouchableOpacity>
         
         <TouchableOpacity
           onPress={buttonClickedHandler}
-          style={styles.roundButton1}
+          style={styles.roundButton}
           defaultValue={"Friday"}>
           <Text>F</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={buttonClickedHandler}
-          style={styles.roundButton1}
+          style={styles.roundButton}
           defaultValue={"Saturday"}>
           <Text>S</Text>
         </TouchableOpacity>
@@ -143,16 +140,6 @@ const Time = ({navigation})  => {
           <Text style={styles.buttonText}>Select a Time</Text> 
         </Pressable>
       </View>
-      {show && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode={mode}
-          is24Hour={true}
-          display="default"
-          onChange={onChange}
-        />
-      )}
     </View>
   );
 };
