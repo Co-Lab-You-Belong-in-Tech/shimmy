@@ -76,90 +76,82 @@ const Time = ({navigation})  => {
 
   return (
     <View style={styles.screen}>
-    <View style={styles.row}>
-    <DateTimePicker
-          testID="dateTimePicker"
-          display="spinner"
-          value={date}
-          mode={mode}
-          is24Hour={true}
-          onChange={onChange}
-    />
-      <TouchableOpacity
-          onPress={() => { 
-          let value = "Sunday";
-          buttonClickedHandler(value);
-          }}
-          style={styles.roundButton}
-          >
-          <Text>S</Text>
-      </TouchableOpacity>
+      <View style={styles.row}>
+          <TouchableOpacity
+              onPress={() => { 
+              let value = "Sunday";
+              buttonClickedHandler(value);
+              }}
+              style={styles.roundButton}
+              >
+              <Text>S</Text>
+          </TouchableOpacity>
 
-      <TouchableOpacity
-          onPress={() => { 
-          let value = "Monday";
-          buttonClickedHandler(value);
-          }}
-          style={styles.roundButton}
-          >
-          <Text>M</Text>
-      </TouchableOpacity>
+          <TouchableOpacity
+              onPress={() => { 
+              let value = "Monday";
+              buttonClickedHandler(value);
+              }}
+              style={styles.roundButton}
+              >
+              <Text>M</Text>
+          </TouchableOpacity>
 
-      <TouchableOpacity
-          onPress={() => { 
-          let value = "Tuesday";
-          buttonClickedHandler(value);
-          }}
-          style={styles.roundButton}
-          >
-          <Text>T</Text>
-      </TouchableOpacity>
+          <TouchableOpacity
+              onPress={() => { 
+              let value = "Tuesday";
+              buttonClickedHandler(value);
+              }}
+              style={styles.roundButton}
+              >
+              <Text>T</Text>
+          </TouchableOpacity>
 
-      <TouchableOpacity
-          onPress={() => { 
-          let value = "Wednesday";
-          buttonClickedHandler(value);
-          }}
-          style={styles.roundButton}
-          >
-          <Text>W</Text>
-      </TouchableOpacity>
+          <TouchableOpacity
+              onPress={() => { 
+              let value = "Wednesday";
+              buttonClickedHandler(value);
+              }}
+              style={styles.roundButton}
+              >
+              <Text>W</Text>
+          </TouchableOpacity>
 
-      <TouchableOpacity
-          onPress={() => { 
-          let value = "Thursday";
-          buttonClickedHandler(value);
-          }}
-          style={styles.roundButton}
-          >
-          <Text>T</Text>
-      </TouchableOpacity>
+          <TouchableOpacity
+              onPress={() => { 
+              let value = "Thursday";
+              buttonClickedHandler(value);
+              }}
+              style={styles.roundButton}
+              >
+              <Text>T</Text>
+          </TouchableOpacity>
 
-      <TouchableOpacity
-          onPress={() => { 
-          let value = "Friday";
-          buttonClickedHandler(value);
-          }}
-          style={styles.roundButton}
-          >
-          <Text>F</Text>
-      </TouchableOpacity>
+          <TouchableOpacity
+              onPress={() => { 
+              let value = "Friday";
+              buttonClickedHandler(value);
+              }}
+              style={styles.roundButton}
+              >
+              <Text>F</Text>
+          </TouchableOpacity>
 
-      <TouchableOpacity
-          onPress={() => { 
-          let value = "Saturday";
-          buttonClickedHandler(value);
-          }}
-          style={styles.roundButton}
-          >
-          <Text>S</Text>
-      </TouchableOpacity>
-        </View>
-      <View>
-        <Pressable style={styles.button} onPress={showTimepicker}>
-          <Text style={styles.buttonText}>Select a Time</Text> 
-        </Pressable>
-      </View>
+          <TouchableOpacity
+              onPress={() => { 
+              let value = "Saturday";
+              buttonClickedHandler(value);
+              }}
+              style={styles.roundButton}
+              >
+              <Text>S</Text>
+          </TouchableOpacity>
+          </View>
+          <View>
+            <Pressable style={styles.button} onPress={showTimepicker}>
+              <Text style={styles.buttonText}>Select a Time</Text> 
+            </Pressable>
+          </View>
     </View>
   );
 };
