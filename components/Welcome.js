@@ -1,4 +1,3 @@
-import { builtinModules } from 'module';
 import React from 'react';
 import AppLoading from 'expo-app-loading';
 import { View, Text, Pressable, StyleSheet} from 'react-native';
@@ -6,6 +5,7 @@ import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold
   } from '@expo-google-fonts/baloo-2';
+import SvgComponent from './SvgComponent';
 
 
 const Welcome = ({navigation}) => {
@@ -21,7 +21,8 @@ const Welcome = ({navigation}) => {
 		<View style={styles.container}>
 			<Text style={styles.headertext}>Welcome to</Text>
 			<Text style={{fontFamily: 'Baloo2_600SemiBold', fontSize: 90}}>Shimmy</Text>
-			<Text>Sit less, move more</Text>
+			<SvgComponent />
+			<Text style={styles.tagline}>Sit less, move more</Text>
 			<Pressable 
 				onPress={() => navigation.navigate('Name')}
 				style={styles.button}
@@ -45,11 +46,11 @@ const styles = StyleSheet.create({
 	button: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		paddingVertical: 12,
+		paddingVertical: 16,
 		paddingHorizontal: 32,
 		borderRadius: 25,
 		elevation: 3,
-		backgroundColor: 'black',
+		backgroundColor: '#15999B',
 		width: 200
 	},
 
@@ -63,6 +64,13 @@ const styles = StyleSheet.create({
 
 	headertext: {
 		fontSize: 26,
+		lineHeight: 30,
+		fontFamily: 'Baloo2_400Regular'
+	},
+
+	tagline: {
+		fontSize: 26,
+		padding: 20,
 		lineHeight: 30,
 		fontFamily: 'Baloo2_400Regular'
 	}

@@ -54,7 +54,7 @@ const Time = ({navigation})  => {
       paddingHorizontal: 32,
       borderRadius: 25,
       elevation: 3,
-      backgroundColor: 'black',
+      backgroundColor: '#15999B',
     },
     roundButton: {
       margin: 15,
