@@ -1,21 +1,29 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Welcome from './components/Welcome';
 import Name from './components/Name';
 import Time from './components/Time';
-import {app} from './firebase';
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: 'rgb(242, 242, 242)',
+  },
+};
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={MyTheme}>
       <Stack.Navigator>
         <Stack.Screen options={{headerShown: false}} name="Welcome" component={Welcome}/>
         <Stack.Screen  
         options={{
+          cardStyle: { backgroundColor: '#FFEBAF' },
           headerTitle:"", 
           headerTransparent: true,
           headerStyle: {
@@ -37,7 +45,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFEBAF',
     alignItems: 'center',
     justifyContent: 'center',
   },

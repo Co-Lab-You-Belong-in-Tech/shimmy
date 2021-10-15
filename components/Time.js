@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import firebase from '../firebase';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const Time = ({navigation})  => {
   const [date, setDate] = useState(new Date(1598051730000));
@@ -36,47 +37,55 @@ const Time = ({navigation})  => {
   };
 
   const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  row: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
-  button: {
-    width: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 25,
-    elevation: 3,
-    backgroundColor: 'black',
-  },
-  roundButton: {
-    margin: 15,
-    width: 15,
-    height: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 1,
-    borderRadius: 100,
-    backgroundColor: 'lightgrey',
-  },
-  buttonText: {
-    fontSize: 16,
-    lineHeight: 21,
-    fontWeight: 'bold',
-    letterSpacing: 0.25,
-    color: 'white',
-  }
+    screen: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    row: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+    },
+    button: {
+      width: 100,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 12,
+      paddingHorizontal: 32,
+      borderRadius: 25,
+      elevation: 3,
+      backgroundColor: 'black',
+    },
+    roundButton: {
+      margin: 15,
+      width: hp('10%'),
+      height: wp('10%'),
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 1,
+      borderRadius: 100,
+      backgroundColor: 'lightgrey',
+    },
+    buttonText: {
+      fontSize: 16,
+      lineHeight: 21,
+      fontWeight: 'bold',
+      letterSpacing: 0.25,
+      color: 'white',
+    }
 });
 
   return (
     <View style={styles.screen}>
       <View style={styles.row}>
+        <DateTimePicker
+              testID="dateTimePicker"
+              display="spinner"
+              value={date}
+              mode={mode}
+              is24Hour={true}
+              onChange={onChange}
+        />
           <TouchableOpacity
               onPress={() => { 
               let value = "Sunday";
