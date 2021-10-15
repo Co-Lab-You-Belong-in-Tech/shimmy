@@ -4,7 +4,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import firebase from '../firebase';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-const Time = ({navigation})  => {
+const Time = ({navigation}) => {
   const [date, setDate] = useState(new Date(1598051730000));
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
@@ -161,7 +161,16 @@ const Time = ({navigation})  => {
               <Text style={styles.buttonText}>Select a Time</Text> 
             </Pressable>
           </View>
+          <Pressable 
+            style={styles.button}
+            onPress={() => {
+                navigation.navigate('Home');
+            }}>
+                <Text style={styles.buttonText}>Next</Text>
+            </Pressable>
     </View>
+
+    
   );
 };
 

@@ -5,35 +5,51 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Welcome from './components/Welcome';
 import Name from './components/Name';
 import Time from './components/Time';
-
-const MyTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    background: 'rgb(242, 242, 242)',
-  },
-};
+import HomeScreen from './components/HomeScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer theme={MyTheme}>
+    <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen options={{headerShown: false}} name="Welcome" component={Welcome}/>
+        <Stack.Screen 
+          options={{headerShown: false}} 
+          name="Welcome" 
+          component={Welcome}
+        />
         <Stack.Screen  
-        options={{
-          cardStyle: { backgroundColor: '#FFEBAF' },
-          headerTitle:"", 
-          headerTransparent: true,
-          headerStyle: {
-            borderBottomWidth: 0
-          },
-          
-      }}
+          options={{
+            cardStyle: { backgroundColor: '#FFEBAF' },
+            headerTitle:"", 
+            headerTransparent: true,
+            headerStyle: {
+              borderBottomWidth: 0
+            },
+            }}
         name="Name" 
-        component={Name}/>
-        <Stack.Screen name="Time" component={Time}/>
+        component={Name}
+        />
+        <Stack.Screen name="Time" 
+          options={{
+            cardStyle: { backgroundColor: '#FFEBAF' },
+            headerTitle:"", 
+            headerTransparent: true,
+            headerStyle: {
+              borderBottomWidth: 0
+            },
+            }}
+        component={Time}/>
+        <Stack.Screen name="Home" 
+          options={{
+            cardStyle: { backgroundColor: '#FFEBAF' },
+            headerTitle:"", 
+            headerTransparent: true,
+            headerStyle: {
+              borderBottomWidth: 0
+            },
+            }}
+        component={HomeScreen}/>
         {/* <Stack.Screen name="Date" component={}/>
         <Stack.Screen name="Notification" component={}/>
         <Stack.Screen name="Menu" component={}/> */}
