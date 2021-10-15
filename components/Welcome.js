@@ -7,7 +7,6 @@ import { useFonts,
   } from '@expo-google-fonts/baloo-2';
 import SvgComponent from './SvgComponent';
 
-
 const Welcome = ({navigation}) => {
 	let [fontsLoaded] = useFonts({
 		Baloo2_400Regular,
