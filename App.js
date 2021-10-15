@@ -27,10 +27,11 @@ export default function App() {
               borderBottomWidth: 0
             },
             }}
-        name="Name" 
-        component={Name}
+          name="Name" 
+          component={Name}
         />
-        <Stack.Screen name="Time" 
+        <Stack.Screen 
+          name="Time" 
           options={{
             cardStyle: { backgroundColor: '#FFEBAF' },
             headerTitle:"", 
@@ -39,8 +40,10 @@ export default function App() {
               borderBottomWidth: 0
             },
             }}
-        component={Time}/>
-        <Stack.Screen name="Home" 
+          component={Time}
+        />
+        <Stack.Screen 
+          name="Home" 
           options={{
             cardStyle: { backgroundColor: '#FFEBAF' },
             headerTitle:"", 
@@ -49,7 +52,7 @@ export default function App() {
               borderBottomWidth: 0
             },
             }}
-        component={HomeScreen}/>
+          component={HomeScreen}/>
         {/* <Stack.Screen name="Date" component={}/>
         <Stack.Screen name="Notification" component={}/>
         <Stack.Screen name="Menu" component={}/> */}

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 
 const HomeScreen = ({navigation}) => {
@@ -25,9 +26,58 @@ const HomeScreen = ({navigation}) => {
 
   return (
 
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+    <Tab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        if (route.name === 'Home') {
+          return (
+            <Ionicons
+              name={
+                focused
+                  ? 'ios-information-circle'
+                  : 'ios-information-circle-outline'
+              }
+              size={size}
+              color={color}
+            />
+          );
+        } else if (route.name === 'Settings') {
+          return (
+            <Ionicons
+              name={focused ? 'ios-list-box' : 'ios-list'}
+              size={size}
+              color={color}
+            />
+          );
+        }
+      },
+      tabBarInactiveTintColor: 'gray',
+      tabBarActiveTintColor: 'tomato',
+    })}
+  >
+        <Tab.Screen 
+          name="Home"
+          options={{
+            cardStyle: { backgroundColor: '#FFEBAF' },
+            headerTitle:"", 
+            headerTransparent: true,
+            headerStyle: {
+              borderBottomWidth: 0
+            },
+            }}
+          component={HomeScreen} 
+        />
+        <Tab.Screen 
+          name="Settings" 
+          options={{
+          cardStyle: { backgroundColor: '#FFEBAF' },
+          headerTitle:"", 
+          headerTransparent: true,
+          headerStyle: {
+            borderBottomWidth: 0
+          },
+          }}
+        component={SettingsScreen} />
       </Tab.Navigator>
 
   );
