@@ -30,7 +30,7 @@ const Name = ({navigation}) => {
 	} else {
 	return (
         <View style={styles.container}>
-            <Text style={{fontFamily: 'Baloo2_400Regular', fontSize: 45}}>What's your name?</Text>
+            <Text style={styles.headertext}>What's your name?</Text>
             <TextInput
                 style={{
                     height: 40,
@@ -60,6 +60,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
+		fontFamily: 'Baloo2_400Regular'
+	},
+
+    
+	headertext: {
+		fontSize: 26,
+		lineHeight: 30,
 		fontFamily: 'Baloo2_400Regular'
 	},
 
