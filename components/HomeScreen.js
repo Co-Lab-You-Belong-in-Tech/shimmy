@@ -1,23 +1,45 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
+import AppLoading from 'expo-app-loading';
+import { View, Text, Pressable, StyleSheet} from 'react-native';
+import { useFonts,
+	Baloo2_400Regular,
+	Baloo2_600SemiBold
+  } from '@expo-google-fonts/baloo-2';
 
 const HomeScreen = ({navigation}) => {
+  let [fontsLoaded] = useFonts({
+		Baloo2_400Regular,
+		Baloo2_600SemiBold
+	});
+
   function HomeScreen() {
+    if (!fontsLoaded) {
+      return <AppLoading />; 
+    } else {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Home!</Text>
+        <Text style={{ position: 'absolute', top: 20, fontFamily: 'Baloo2_600SemiBold', fontSize: 29, lineHeight: 40 }}>Shimmy</Text>
+        <Text>Home screen will include...</Text>
+        <Text>Weekly progress bar</Text>
+        <Text>Schedule view</Text>
+        <Text>Start the shimmy time</Text>
       </View>
     );
-  }
+  }};
   
   function SettingsScreen() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Settings!</Text>
+        <Text style={{ position: 'absolute', top: 20, fontFamily: 'Baloo2_600SemiBold', fontSize: 29, lineHeight: 40 }}>Shimmy</Text>
+        <Text>Settings screen will include...</Text>
+        <Text>Membership information</Text>
+        <Text>Setting shimmy time</Text>
+        <Text>Toggle notifications</Text>
+        <Text>Allow music</Text>
+        <Text>Allow haptics</Text>
       </View>
     );
   }

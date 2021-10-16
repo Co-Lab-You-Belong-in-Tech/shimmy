@@ -33,7 +33,6 @@ const Welcome = ({navigation}) => {
 }};
 
 const styles = StyleSheet.create({
-
 	container: {
 		backgroundColor: '#FFEBAF',
 		flex: 1,
@@ -41,7 +40,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		fontFamily: 'Baloo2_400Regular'
 	},
-
 	button: {
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -52,7 +50,6 @@ const styles = StyleSheet.create({
 		backgroundColor: '#15999B',
 		width: 200
 	},
-
 	text: {
 		fontSize: 16,
 		lineHeight: 21,

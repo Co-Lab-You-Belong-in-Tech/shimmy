@@ -47,29 +47,39 @@ const Time = ({navigation}) => {
       flexWrap: "wrap",
     },
     button: {
-      width: 100,
       alignItems: 'center',
       justifyContent: 'center',
-      paddingVertical: 12,
+      paddingVertical: 16,
       paddingHorizontal: 32,
       borderRadius: 25,
       elevation: 3,
       backgroundColor: '#15999B',
+      width: 200
+    },
+    timeButton:{
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: 58,
+      paddingVertical: 16,
+      paddingHorizontal: 32,
+      borderRadius: 25,
+      elevation: 3,
+      backgroundColor: '#15999B',
+      width: 200
     },
     roundButton: {
       margin: 15,
-      width: hp('10%'),
-      height: wp('10%'),
+      width: 45,
+      height: 45,
       justifyContent: 'center',
       alignItems: 'center',
       padding: 1,
-      borderRadius: 100,
-      backgroundColor: 'lightgrey',
+      borderRadius: 50,
+      backgroundColor: '#076264',
     },
     buttonText: {
       fontSize: 16,
       lineHeight: 21,
-      fontWeight: 'bold',
       letterSpacing: 0.25,
       color: 'white',
     }
@@ -77,6 +87,9 @@ const Time = ({navigation}) => {
 
   return (
     <View style={styles.screen}>
+      <Pressable style={styles.timeButton} onPress={showTimepicker}>
+        <Text style={styles.buttonText}>Select a Time</Text> 
+      </Pressable>
       <View style={styles.row}>
         <DateTimePicker
               testID="dateTimePicker"
@@ -93,7 +106,7 @@ const Time = ({navigation}) => {
               }}
               style={styles.roundButton}
               >
-              <Text>S</Text>
+              <Text style={styles.buttonText}>S</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -103,7 +116,7 @@ const Time = ({navigation}) => {
               }}
               style={styles.roundButton}
               >
-              <Text>M</Text>
+              <Text style={styles.buttonText}>M</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -113,7 +126,7 @@ const Time = ({navigation}) => {
               }}
               style={styles.roundButton}
               >
-              <Text>T</Text>
+              <Text style={styles.buttonText}>T</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -123,7 +136,7 @@ const Time = ({navigation}) => {
               }}
               style={styles.roundButton}
               >
-              <Text>W</Text>
+              <Text style={styles.buttonText}>W</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -133,7 +146,7 @@ const Time = ({navigation}) => {
               }}
               style={styles.roundButton}
               >
-              <Text>T</Text>
+              <Text style={styles.buttonText}>T</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -143,7 +156,7 @@ const Time = ({navigation}) => {
               }}
               style={styles.roundButton}
               >
-              <Text>F</Text>
+              <Text style={styles.buttonText}>F</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -153,13 +166,11 @@ const Time = ({navigation}) => {
               }}
               style={styles.roundButton}
               >
-              <Text>S</Text>
+              <Text style={styles.buttonText}>S</Text>
           </TouchableOpacity>
           </View>
           <View>
-            <Pressable style={styles.button} onPress={showTimepicker}>
-              <Text style={styles.buttonText}>Select a Time</Text> 
-            </Pressable>
+ 
           </View>
           <Pressable 
             style={styles.button}
@@ -169,8 +180,6 @@ const Time = ({navigation}) => {
                 <Text style={styles.buttonText}>Next</Text>
             </Pressable>
     </View>
-
-    
   );
 };
 
