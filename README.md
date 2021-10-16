@@ -1,8 +1,9 @@
 # Shimmy
-### Sit less, move more.
-![Shimmy](./shimmy.svg)
-<img src="./shimmy.svg">
+![Shimmy](./shimmy.png)\
+_shimmy by sam lam_ 
 
+### Sit less, move more.
+\
 **Team Shimmy of Co.Lab Cohourt #7**
   
 **Project Manager** Irene\
