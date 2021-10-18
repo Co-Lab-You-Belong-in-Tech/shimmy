@@ -13,6 +13,8 @@ const Welcome = ({navigation}) => {
 		Baloo2_600SemiBold
 	});
 
+	
+
 	if (!fontsLoaded) {
 		return <AppLoading />; 
 	} else {

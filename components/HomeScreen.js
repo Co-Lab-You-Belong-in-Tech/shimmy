@@ -10,10 +10,16 @@ import { useFonts,
   } from '@expo-google-fonts/baloo-2';
 
 const HomeScreen = ({navigation}) => {
+  navigation.setOptions({
+    headerLeft: () => null,
+  })
+
+
   let [fontsLoaded] = useFonts({
 		Baloo2_400Regular,
 		Baloo2_600SemiBold
 	});
+
 
   function HomeScreen() {
     if (!fontsLoaded) {
@@ -26,6 +32,10 @@ const HomeScreen = ({navigation}) => {
         <Text>Weekly progress bar</Text>
         <Text>Schedule view</Text>
         <Text>Start the shimmy time</Text>
+        <Pressable
+          onPress={() => navigation.navigate('Shimmytime')}>
+            <Text>Test</Text>
+			  </Pressable>
       </View>
     );
   }};

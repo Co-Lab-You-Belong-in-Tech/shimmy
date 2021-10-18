@@ -6,6 +6,7 @@ import Welcome from './components/Welcome';
 import Name from './components/Name';
 import Time from './components/Time';
 import HomeScreen from './components/HomeScreen';
+import Shimmytime from './components/Shimmytime';
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +54,17 @@ export default function App() {
             },
             }}
           component={HomeScreen}/>
+        <Stack.Screen
+          name="Shimmytime"
+          component={Shimmytime}
+          options={{
+            headerTitle: "shimmy time",
+            headerTitleAlign: 'center',
+            headerStyle: {
+              borderBottomWidth: 0,
+            },
+          }}
+        />
         {/* <Stack.Screen name="Date" component={}/>
         <Stack.Screen name="Notification" component={}/>
         <Stack.Screen name="Menu" component={}/> */}
