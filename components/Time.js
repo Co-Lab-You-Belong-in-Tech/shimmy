@@ -3,6 +3,7 @@ import AppLoading from 'expo-app-loading';
 import { View, Text, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import firebase from '../firebase';
+import {Picker} from '@react-native-picker/picker';
 import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold,
@@ -13,6 +14,7 @@ const Time = ({navigation}) => {
   const [date, setDate] = useState(new Date(1598051730000));
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState();
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -122,6 +124,14 @@ shimmy time?</Text>
       <Pressable style={styles.timeButton} onPress={showTimepicker}>
         <Text style={styles.buttonText}>Select a Time</Text> 
       </Pressable>
+      <Picker
+  selectedValue={selectedLanguage}
+  onValueChange={(itemValue, itemIndex) =>
+    setSelectedLanguage(itemValue)
+  }>
+  <Picker.Item label="Java" value="java" />
+  <Picker.Item label="JavaScript" value="js" />
+</Picker>
       <View style={styles.row}>
         <DateTimePicker
               testID="dateTimePicker"

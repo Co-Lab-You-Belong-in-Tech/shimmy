@@ -1898,6 +1898,11 @@
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
 
+"@react-native-picker/picker@1.16.1":
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.16.1.tgz#cc5d05b0d651445afa519c67824d8af3e43fa10c"
+  integrity sha512-sk07ARwL0cMXwkXsqcxyprL/KiEVD0xRFXFqznTnZs1YXqwxEqz6GiGtq2vQlK64CzXDpHX8gw1QQz47abBY1Q==
+
 "@react-navigation/bottom-tabs@^6.0.9":
   version "6.0.9"
   resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-6.0.9.tgz#916b6a4b495ea8fdcace98dab727064876875d09"
@@ -3281,9 +3286,9 @@ expo-status-bar@~1.0.4:
   resolved "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-1.0.4.tgz"
   integrity sha512-s7nc496D/Zn1NGiMJ5wu6HyIdXxbgGtmZZtbHm7rpbcmLdf28GmMSNHDx7M0t00BMhky7VAurTCUo+BJs8ugsw==
 
-expo@~42.0.1:
+expo@^42.0.4:
   version "42.0.4"
-  resolved "https://registry.npmjs.org/expo/-/expo-42.0.4.tgz"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-42.0.4.tgz#07b0e044e43f7cb366e2082850b41b8bb5117a21"
   integrity sha512-i1QvMb3cIXdsx7OQh0/N0KJHkPwFlBGEGsXRr/IF2DJFHMWd/J4DR8IaAnTAhx0ifborWHmENgXj5hgWJgirog==
   dependencies:
     "@babel/runtime" "^7.1.2"
@@ -3900,6 +3905,11 @@ inquirer@^3.0.6:
     string-width "^2.1.0"
     strip-ansi "^4.0.0"
     through "^2.3.6"
+
+install@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/install/-/install-0.13.0.tgz#6af6e9da9dd0987de2ab420f78e60d9c17260776"
+  integrity sha512-zDml/jzr2PKU9I8J/xyZBQn8rPCAY//UOYNmR01XwNwyfhEWObo2SWfSl1+0tm1u6PhxLwDnfsT/6jB7OUxqFA==
 
 invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
