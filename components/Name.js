@@ -11,8 +11,8 @@ import AppLoading from 'expo-app-loading';
 const Name = ({navigation}) => {
     const [text, setText] = useState('')
 
-    const dbRef = firebase.database().ref()
-
+    const db = firebase.firestore();
+    
     navigation.setOptions({
         headerRight:() => (
             <Pressable onPress={() => navigation.navigate('Time')}>
@@ -45,7 +45,11 @@ const Name = ({navigation}) => {
             <Pressable 
             style={styles.button}
             onPress={() => {
-                dbRef.push(text)
+                db.collection("users")
+                .doc('profile')
+                .set({
+                  name: text,
+                });
                 navigation.navigate('Time');
             }}>
                 <Text style={styles.buttonText}>Next</Text>
@@ -62,14 +66,11 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		fontFamily: 'Baloo2_400Regular'
 	},
-
-    
 	headertext: {
 		fontSize: 26,
 		lineHeight: 30,
 		fontFamily: 'Baloo2_400Regular'
 	},
-
 	button: {
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -80,7 +81,6 @@ const styles = StyleSheet.create({
 		backgroundColor: '#15999B',
 		width: 200
 	},
-
     buttonText: {
         fontSize: 16,
         lineHeight: 21,
@@ -88,6 +88,5 @@ const styles = StyleSheet.create({
         letterSpacing: 0.25,
         color: 'white',
     }
-
 })
 export default Name;
