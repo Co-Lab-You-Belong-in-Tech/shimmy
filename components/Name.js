@@ -11,7 +11,9 @@ import AppLoading from 'expo-app-loading';
 const Name = ({navigation}) => {
     const [text, setText] = useState('')
 
-    const dbRef = firebase.database().ref()
+    // const dbRef = firebase.database().ref();
+    const fsRef = firebase.firestore();
+    const auth = firebase.auth();
 
     navigation.setOptions({
         headerRight:() => (
@@ -45,7 +47,11 @@ const Name = ({navigation}) => {
             <Pressable 
             style={styles.button}
             onPress={() => {
-                dbRef.push(text)
+                // dbRef.push(text)
+                fsRef.collection('users').doc(auth.currentUser.uid).set({
+                    name: text,
+                    createdOn: firebase.firestore.FieldValue.serverTimestamp(),
+                })
                 navigation.navigate('Time');
             }}>
                 <Text style={styles.buttonText}>Next</Text>
