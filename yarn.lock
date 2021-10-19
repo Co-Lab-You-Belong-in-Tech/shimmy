@@ -1150,6 +1150,11 @@
   "resolved" "https://registry.npmjs.org/@expo-google-fonts/inter/-/inter-0.2.0.tgz"
   "version" "0.2.0"
 
+"@expo-google-fonts/montserrat@^0.2.0":
+  "integrity" "sha512-wOdsgn1HCZlyqZ5MpdxGR1NOgJvTcDlOtW760gPKSrRnfB+HAC8YsCaRz+TEtARcjINmt7EjuwVv1T4Hty+jCQ=="
+  "resolved" "https://registry.npmjs.org/@expo-google-fonts/montserrat/-/montserrat-0.2.0.tgz"
+  "version" "0.2.0"
+
 "@expo/config-plugins@^3.0.0", "@expo/config-plugins@3.1.0":
   "integrity" "sha512-V5qxaxCAExBM0TXmbU1QKiZcAGP3ecu7KXede8vByT15cro5PkcWu2sSdJCYbHQ/gw6Vf/i8sr8gKlN8V8TSLg=="
   "resolved" "https://registry.npmjs.org/@expo/config-plugins/-/config-plugins-3.1.0.tgz"
@@ -1190,11 +1195,6 @@
     "slash" "^3.0.0"
     "xcode" "^3.0.1"
     "xml2js" "^0.4.23"
-
-"@expo-google-fonts/montserrat@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@expo-google-fonts/montserrat/-/montserrat-0.2.0.tgz#5408c3c287f25bda14a77a8dd98c510e27df773a"
-  integrity sha512-wOdsgn1HCZlyqZ5MpdxGR1NOgJvTcDlOtW760gPKSrRnfB+HAC8YsCaRz+TEtARcjINmt7EjuwVv1T4Hty+jCQ==
 
 "@expo/config-plugins@2.0.4":
   "integrity" "sha512-JGt/X2tFr7H8KBQrKfbGo9hmCubQraMxq5sj3bqDdKmDOLcE1a/EDCP9g0U4GHsa425J8VDIkQUHYz3h3ndEXQ=="
