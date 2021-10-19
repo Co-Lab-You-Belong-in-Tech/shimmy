@@ -6,26 +6,24 @@ const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-
     const auth = firebase.auth();
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            if (user) {
-                navigation.navigate('Welcome');
-            }
-        })
-
-        return unsubscribe
+      const unsubscribe = auth.onAuthStateChanged(user => {
+        if (user) {
+          navigation.navigate('Welcome');
+        }
+      })
+      return unsubscribe
     })
 
     const handleSignUp = () => {
-        auth.createUserWithEmailAndPassword(email, password)
-            .then(userCredentials => {
-                const user = userCredentials.user;
-                console.log(`registered with`, user.email);
-            })
-            .catch(err => alert(err.message))
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(userCredentials => {
+            const user = userCredentials.user;
+            console.log(`registered with`, user.email);
+        })
+        .catch(err => alert(err.message))
     }
 
 

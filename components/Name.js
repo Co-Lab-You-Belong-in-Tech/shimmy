@@ -8,17 +8,17 @@ import { useFonts,
 import AppLoading from 'expo-app-loading';
 
 const Name = ({navigation}) => {
-    const [text, setText] = useState('')
-    const fsRef = firebase.firestore();
-    const auth = firebase.auth();
-  
-    navigation.setOptions({
-        headerRight:() => (
-            <Pressable onPress={() => navigation.navigate('Time')}>
-                <Text>Skip</Text>
-            </Pressable>
-        )
-    })
+  const [text, setText] = useState('')
+  const fsRef = firebase.firestore();
+  const auth = firebase.auth();
+
+  navigation.setOptions({
+    headerRight:() => (
+      <Pressable onPress={() => navigation.navigate('Time')}>
+        <Text>Skip</Text>
+      </Pressable>
+    )
+  })
 
 	let [fontsLoaded] = useFonts({
 		Baloo2_400Regular,
@@ -27,36 +27,36 @@ const Name = ({navigation}) => {
 	if (!fontsLoaded) {
 		return <AppLoading />; 
 	} else {
-	return (
-        <View style={styles.container}>
-            <Text style={styles.headertext}>What's your name?</Text>
-            <TextInput
-                style={{
-                    height: 40,
-                    borderColor: 'gray',
-                    borderWidth: 1,
-                    marginVertical: 20,
-                    padding: 10
-                }}
-                onChangeText={text => setText(text)}
-                defaultValue={text}
-            />
-            <Pressable 
-            style={styles.button}
-            onPress={() => {
-                // dbRef.push(text)
-                fsRef.collection('users')
-                  .doc(auth.currentUser.uid)
-                  .set({
-                    name: text,
-                    createdOn: firebase.firestore.FieldValue.serverTimestamp(),
-                });
-                navigation.navigate('Time');
-            }}>
-                <Text style={styles.buttonText}>Next</Text>
-            </Pressable>
-        </View>
-    )}
+    return (
+      <View style={styles.container}>
+        <Text style={styles.headertext}>What's your name?</Text>
+        <TextInput
+            style={{
+                height: 40,
+                borderColor: 'gray',
+                borderWidth: 1,
+                marginVertical: 20,
+                padding: 10
+            }}
+            onChangeText={text => setText(text)}
+            defaultValue={text}
+        />
+        <Pressable 
+        style={styles.button}
+        onPress={() => {
+            // dbRef.push(text)
+            fsRef.collection('users')
+              .doc(auth.currentUser.uid)
+              .set({
+                name: text,
+                createdOn: firebase.firestore.FieldValue.serverTimestamp(),
+            });
+            navigation.navigate('Time');
+        }}>
+        <Text style={styles.buttonText}>Next</Text>
+        </Pressable>
+      </View>
+  )}
 }
 
 const styles = StyleSheet.create({

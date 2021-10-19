@@ -13,8 +13,6 @@ const Welcome = ({navigation}) => {
 		Baloo2_600SemiBold
 	});
 
-	
-
 	if (!fontsLoaded) {
 		return <AppLoading />; 
 	} else {
@@ -59,13 +57,11 @@ const styles = StyleSheet.create({
 		letterSpacing: 0.25,
 		color: 'white',
 	},
-
 	headertext: {
 		fontSize: 26,
 		lineHeight: 30,
 		fontFamily: 'Baloo2_400Regular'
 	},
-
 	tagline: {
 		fontSize: 26,
 		padding: 20,
