@@ -7,14 +7,11 @@ import { useFonts,
   } from '@expo-google-fonts/baloo-2';
 import AppLoading from 'expo-app-loading';
 
-
 const Name = ({navigation}) => {
     const [text, setText] = useState('')
-
-    // const dbRef = firebase.database().ref();
     const fsRef = firebase.firestore();
     const auth = firebase.auth();
-
+  
     navigation.setOptions({
         headerRight:() => (
             <Pressable onPress={() => navigation.navigate('Time')}>
@@ -32,7 +29,7 @@ const Name = ({navigation}) => {
 	} else {
 	return (
         <View style={styles.container}>
-            <Text style={{fontFamily: 'Baloo2_400Regular', fontSize: 45}}>What's your name?</Text>
+            <Text style={styles.headertext}>What's your name?</Text>
             <TextInput
                 style={{
                     height: 40,
@@ -48,10 +45,12 @@ const Name = ({navigation}) => {
             style={styles.button}
             onPress={() => {
                 // dbRef.push(text)
-                fsRef.collection('users').doc(auth.currentUser.uid).set({
+                fsRef.collection('users')
+                  .doc(auth.currentUser.uid)
+                  .set({
                     name: text,
                     createdOn: firebase.firestore.FieldValue.serverTimestamp(),
-                })
+                });
                 navigation.navigate('Time');
             }}>
                 <Text style={styles.buttonText}>Next</Text>
@@ -61,14 +60,18 @@ const Name = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
+  container: {
 		backgroundColor: '#FFEBAF',
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
 		fontFamily: 'Baloo2_400Regular'
 	},
-
+	headertext: {
+		fontSize: 26,
+		lineHeight: 30,
+		fontFamily: 'Baloo2_400Regular'
+	},
 	button: {
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -79,14 +82,12 @@ const styles = StyleSheet.create({
 		backgroundColor: '#15999B',
 		width: 200
 	},
-
-    buttonText: {
-        fontSize: 16,
-        lineHeight: 21,
-        fontWeight: 'bold',
-        letterSpacing: 0.25,
-        color: 'white',
+  buttonText: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'white',
     }
-
 })
 export default Name;
