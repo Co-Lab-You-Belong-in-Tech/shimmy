@@ -10,10 +10,19 @@ import { useFonts,
 import { Montserrat_400Regular } from '@expo-google-fonts/montserrat';
 
 const Time = ({navigation}) => {
-  const [date, setDate] = useState(new Date(1598051730000));
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
-  const [country, setCountry] = useState('Unknown');
+  const [daysArray, setDaysArray] = useState([]);
+  const [time, setTime] = useState(false);
+
+  const createShimmyTime = (day, time) => {
+    return fsRef.collection('shimmytimes')
+      .add({
+        uid: auth.currentUser.uid,
+        scheduled_time: time,
+        scheduled_day: day,
+        created_on: firebase.firestore.FieldValue.serverTimestamp(),
+        completed: false
+      });
+  };
 
   const styles = StyleSheet.create({
     headertext: {
@@ -76,7 +85,6 @@ const Time = ({navigation}) => {
       color: 'white',
     }
 });
-
   let [fontsLoaded] = useFonts({
     Baloo2_400Regular,
     Baloo2_600SemiBold,
@@ -88,21 +96,21 @@ const Time = ({navigation}) => {
   } else {
   return (
     <View style={styles.container}>
-      <Text style={styles.headertext}>When would you like to have
-      shimmy time?</Text>
+      <Text style={styles.headertext}>
+       When would you like to have shimmy time?
+      </Text>
       <Text style={styles.subtext}>This is a 1 minute movement break.</Text>
         <Picker
-          selectedValue={country}
-          onValueChange={(value, index) => setCountry(value)}
+          selectedValue={time}
+          onValueChange={(value) => setTime(value)}
           mode="dropdown" // Android only
           style={styles.picker}
-          >
+        >
           <Picker.Item label="09:00" value="09:00" />
           <Picker.Item label="09:30" value="09:30" />
           <Picker.Item label="10:30" value="10:30" />
           <Picker.Item label="11:00" value="11:00" />
         </Picker>
-        <Text style={styles.buttonText}>Select a Time</Text> 
         <View style={styles.row}>
           <TouchableOpacity
               onPress={() => { 
@@ -166,8 +174,11 @@ const Time = ({navigation}) => {
 
           <TouchableOpacity
               onPress={() => { 
-              let value = "Saturday";
-              buttonClickedHandler(value);
+                // Need to complete logic
+              daysArray.includes('Saturday') ?
+              setDaysArray(prev => ([...prev])) :
+              setDaysArray(prev => ([...prev, 'Saturday']))
+              console.log(daysArray)
               }}
               style={styles.roundButton}
               >
@@ -180,6 +191,7 @@ const Time = ({navigation}) => {
           <Pressable 
             style={styles.button}
             onPress={() => {
+              // for each day selected, add shimmy times to cloud
                 navigation.navigate('Home');
             }}>
                 <Text style={styles.buttonText}>Next</Text>

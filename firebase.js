@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import 'firebase/database';
 import "firebase/firestore";
+import { endianness } from 'os';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCebMW7UmMCrtJJj4sWstYVExOyMLE_Vc4",
@@ -24,5 +25,16 @@ const db = firebase.firestore();
 // 1. Set toggle of days for shimmy time
 // 2. Set time of shimmy time
 // 3. Add a shimmy time
+//// Example
+// export const createShimmyTime = (uid, date, time) => {
+//   return db.collection('shimmytimes')
+//     .add({
+//       created: firebase.firestore.FieldValue.serverTimestamp(),
+//       uid: uid,
+//       date: date,
+//       time: time,
+//       completed: false
+//     });
+// };
 
 export default firebase;
