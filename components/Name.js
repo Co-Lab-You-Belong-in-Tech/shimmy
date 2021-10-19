@@ -7,12 +7,11 @@ import { useFonts,
   } from '@expo-google-fonts/baloo-2';
 import AppLoading from 'expo-app-loading';
 
-
 const Name = ({navigation}) => {
     const [text, setText] = useState('')
-
-    const db = firebase.firestore();
-    
+    const fsRef = firebase.firestore();
+    const auth = firebase.auth();
+  
     navigation.setOptions({
         headerRight:() => (
             <Pressable onPress={() => navigation.navigate('Time')}>
@@ -45,10 +44,12 @@ const Name = ({navigation}) => {
             <Pressable 
             style={styles.button}
             onPress={() => {
-                db.collection("users")
-                .doc('profile')
-                .set({
-                  name: text,
+                // dbRef.push(text)
+                fsRef.collection('users')
+                  .doc(auth.currentUser.uid)
+                  .set({
+                    name: text,
+                    createdOn: firebase.firestore.FieldValue.serverTimestamp(),
                 });
                 navigation.navigate('Time');
             }}>
@@ -59,7 +60,7 @@ const Name = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
+  container: {
 		backgroundColor: '#FFEBAF',
 		flex: 1,
 		alignItems: 'center',
@@ -81,12 +82,12 @@ const styles = StyleSheet.create({
 		backgroundColor: '#15999B',
 		width: 200
 	},
-    buttonText: {
-        fontSize: 16,
-        lineHeight: 21,
-        fontWeight: 'bold',
-        letterSpacing: 0.25,
-        color: 'white',
+  buttonText: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'white',
     }
 })
 export default Name;
