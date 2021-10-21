@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 import 'firebase/database';
 import "firebase/firestore";
-import { endianness } from 'os';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCebMW7UmMCrtJJj4sWstYVExOyMLE_Vc4",
@@ -17,24 +16,19 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-// Christian Arab notes: Priority hooks needed for our app
-// Onboarding
-// 1. Authentication sign in
-// 2. Set user name
-// Shimmy
-// 1. Set toggle of days for shimmy time
-// 2. Set time of shimmy time
-// 3. Add a shimmy time
-//// Example
-// export const createShimmyTime = (uid, date, time) => {
-//   return db.collection('shimmytimes')
-//     .add({
-//       created: firebase.firestore.FieldValue.serverTimestamp(),
-//       uid: uid,
-//       date: date,
-//       time: time,
-//       completed: false
-//     });
-// };
+export async function getCollection(id) {
+  const snapshot = await db.collection(id).get()
+  const data = snapshot.map(doc => ({ id: doc.id, ...doc.data()}))
+  console.log(data, 'collection')
+}
 
-export default firebase;
+export async function createShimmy(schedule) {
+  const { time } = schedule
+  await db.collection('schedules').add({
+    uid: 123,
+    repeats: "monday",
+    time: time || null,
+    is_active: true,
+    created_on: firebase.database.ServerValue.TIMESTAMP
+  })
+}

@@ -7,7 +7,6 @@ import Name from './components/Name';
 import Time from './components/Time';
 import HomeScreen from './components/HomeScreen';
 import Shimmytime from './components/Shimmytime';
-import LoginScreen from './components/LoginScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,11 +14,6 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="LoginScreen"
-          component={LoginScreen}
-        />
         <Stack.Screen 
           options={{headerShown: false}} 
           name="Welcome" 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable, TextInput, StyleSheet} from 'react-native';
-import firebase from '../firebase';
+import * as db from '../firebase';
 import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold
@@ -9,8 +9,6 @@ import AppLoading from 'expo-app-loading';
 
 const Name = ({navigation}) => {
   const [text, setText] = useState('')
-  const fsRef = firebase.firestore();
-  const auth = firebase.auth();
 
   navigation.setOptions({
     headerRight:() => (
@@ -44,13 +42,6 @@ const Name = ({navigation}) => {
         <Pressable 
         style={styles.button}
         onPress={() => {
-            // dbRef.push(text)
-            fsRef.collection('users')
-              .doc(auth.currentUser.uid)
-              .set({
-                name: text,
-                createdOn: firebase.firestore.FieldValue.serverTimestamp(),
-            });
             navigation.navigate('Time');
         }}>
         <Text style={styles.buttonText}>Next</Text>

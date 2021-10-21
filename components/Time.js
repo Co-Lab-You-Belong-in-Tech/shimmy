@@ -2,27 +2,38 @@ import React, { useState } from 'react';
 import AppLoading from 'expo-app-loading';
 import { View, Text, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import { Picker } from "@react-native-picker/picker";
-import firebase from '../firebase';
+import * as db from '../firebase';
 import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold,
   } from '@expo-google-fonts/baloo-2';
 import { Montserrat_400Regular } from '@expo-google-fonts/montserrat';
 
-const Time = ({navigation}) => {
-  const [daysArray, setDaysArray] = useState([]);
-  const [time, setTime] = useState(false);
+const DEFAULT_SCHED = {
+  uid: 123,
+  repeats: true,
+  time: null
+}
 
-  const createShimmyTime = (day, time) => {
-    return fsRef.collection('shimmytimes')
-      .add({
-        uid: auth.currentUser.uid,
-        scheduled_time: time,
-        scheduled_day: day,
-        created_on: firebase.firestore.FieldValue.serverTimestamp(),
-        completed: false
-      });
-  };
+const Time = ({navigation}) => {
+  const [schedule, setSchedule] = React.useState(DEFAULT_SCHED)
+  const [submitting, setSubmitting] = React.useState(false)
+
+  const handleCreateShedule = () => {
+    try {
+      setSubmitting(true)
+      db.createShimmy(schedule)
+      setSchedule(DEFAULT_LIST)
+      setSubmitting(false)
+    } catch(error) {
+      console.error(error)
+    } finally {
+      setSubmitting(false)
+  }}
+
+  const handleChange = (value) => {
+    setSchedule(prevState => ({ ...prevState, time: value }))
+  } 
 
   const styles = StyleSheet.create({
     headertext: {
@@ -84,16 +95,8 @@ const Time = ({navigation}) => {
       letterSpacing: 0.25,
       color: 'white',
     }
-});
-  let [fontsLoaded] = useFonts({
-    Baloo2_400Regular,
-    Baloo2_600SemiBold,
-    Montserrat_400Regular
-  });
+  })
 
-  if (!fontsLoaded) {
-    return <AppLoading />; 
-  } else {
   return (
     <View style={styles.container}>
       <Text style={styles.headertext}>
@@ -101,103 +104,20 @@ const Time = ({navigation}) => {
       </Text>
       <Text style={styles.subtext}>This is a 1 minute movement break.</Text>
         <Picker
-          selectedValue={time}
-          onValueChange={(value) => setTime(value)}
+          selectedValue={"0900"}
+          onValueChange={(value) => handleChange(value)}
           mode="dropdown" // Android only
-          style={styles.picker}
-        >
-          <Picker.Item label="09:00" value="09:00" />
-          <Picker.Item label="09:30" value="09:30" />
-          <Picker.Item label="10:30" value="10:30" />
-          <Picker.Item label="11:00" value="11:00" />
+          style={styles.picker}>
+          <Picker.Item label="09:00" value="0900" />
+          <Picker.Item label="09:30" value="0930" />
+          <Picker.Item label="10:30" value="1030" />
+          <Picker.Item label="11:00" value="1100" />
         </Picker>
-        <View style={styles.row}>
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Sunday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>S</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Monday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>M</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Tuesday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>T</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Wednesday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>W</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Thursday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>T</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Friday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>F</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-                // Need to complete logic
-              daysArray.includes('Saturday') ?
-              setDaysArray(prev => ([...prev])) :
-              setDaysArray(prev => ([...prev, 'Saturday']))
-              console.log(daysArray)
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>S</Text>
-          </TouchableOpacity>
-          </View>
-          <View>
- 
-          </View>
-          <Pressable 
-            style={styles.button}
-            onPress={() => {
-              // for each day selected, add shimmy times to cloud
-                navigation.navigate('Home');
-            }}>
-                <Text style={styles.buttonText}>Next</Text>
-            </Pressable>
+        <Pressable 
+        style={styles.button}
+        onPress={handleCreateShedule
+        }></Pressable>
     </View>
-  )};
-};
-
+    );
+}
 export default Time;

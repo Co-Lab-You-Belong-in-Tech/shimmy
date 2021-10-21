@@ -14,12 +14,10 @@ const HomeScreen = ({navigation}) => {
     headerLeft: () => null,
   })
 
-
   let [fontsLoaded] = useFonts({
 		Baloo2_400Regular,
 		Baloo2_600SemiBold
 	});
-
 
   function HomeScreen() {
     if (!fontsLoaded) {
@@ -32,9 +30,9 @@ const HomeScreen = ({navigation}) => {
         <Text>Weekly progress bar</Text>
         <Text>Schedule view</Text>
         <Text>Start the shimmy time</Text>
-        <Pressable
+        <Pressable style={styles.scheduleButton}
           onPress={() => navigation.navigate('Shimmytime')}>
-            <Text>Test</Text>
+            <Text>SHIMMYTIME TEST</Text>
 			  </Pressable>
       </View>
     );
@@ -50,6 +48,7 @@ const HomeScreen = ({navigation}) => {
         <Text>Toggle notifications</Text>
         <Text>Allow music</Text>
         <Text>Allow haptics</Text>
+        <Pressable style={styles.scheduleButton}></Pressable>
       </View>
     );
   }
@@ -146,6 +145,14 @@ const styles = StyleSheet.create({
       padding: 1,
       borderRadius: 100,
       backgroundColor: 'lightgrey',
+    },
+    scheduleButton: {
+      postion: 'absolute',
+      marginBottom: 10,
+      width: 56,
+      height: 56,
+      borderRadius: 50,
+      backgroundColor: '#15999B',
     },
     buttonText: {
       fontSize: 16,
