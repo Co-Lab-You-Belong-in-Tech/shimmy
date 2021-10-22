@@ -32,3 +32,8 @@ export async function createShimmy(schedule) {
     created_on: firebase.database.ServerValue.TIMESTAMP
   })
 }
+
+export async function getShimmy(uid){
+  const shimmys = await db.collection('schedules').doc().where.('uid', '==', uid).get()
+  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+}

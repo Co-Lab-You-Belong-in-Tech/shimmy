@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import AppLoading from 'expo-app-loading';
 import { View, Text, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
-import { Picker } from "@react-native-picker/picker";
+import TimeSelector from './TimeSelector'
 import * as db from '../firebase';
 import { useFonts,
 	Baloo2_400Regular,
@@ -14,6 +13,8 @@ const DEFAULT_SCHED = {
   repeats: true,
   time: null
 }
+
+const TIME = "0900"
 
 const Time = ({navigation}) => {
   const [schedule, setSchedule] = React.useState(DEFAULT_SCHED)
@@ -68,7 +69,7 @@ const Time = ({navigation}) => {
       backgroundColor: '#15999B',
       width: 200
     },
-    timeButton:{
+    timeButton: {
       alignItems: 'center',
       justifyContent: 'center',
       margin: 75,
@@ -94,7 +95,14 @@ const Time = ({navigation}) => {
       lineHeight: 21,
       letterSpacing: 0.25,
       color: 'white',
-    }
+    },
+    picker: {
+      marginVertical: 30,
+      width: 300,
+      padding: 10,
+      borderWidth: 1,
+      borderColor: "#666",
+    },
   })
 
   return (
@@ -103,16 +111,7 @@ const Time = ({navigation}) => {
        When would you like to have shimmy time?
       </Text>
       <Text style={styles.subtext}>This is a 1 minute movement break.</Text>
-        <Picker
-          selectedValue={"0900"}
-          onValueChange={(value) => handleChange(value)}
-          mode="dropdown" // Android only
-          style={styles.picker}>
-          <Picker.Item label="09:00" value="0900" />
-          <Picker.Item label="09:30" value="0930" />
-          <Picker.Item label="10:30" value="1030" />
-          <Picker.Item label="11:00" value="1100" />
-        </Picker>
+        <TimeSelector value={value} onValueChange={(value) => handleChange(value)} style={styles.picker}/>
         <Pressable 
         style={styles.button}
         onPress={handleCreateShedule
