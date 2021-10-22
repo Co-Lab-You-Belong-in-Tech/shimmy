@@ -8,6 +8,7 @@ import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold
   } from '@expo-google-fonts/baloo-2';
+import ShimmyCard from './ShimmyCard';
 
 const HomeScreen = ({navigation}) => {
   navigation.setOptions({
@@ -31,11 +32,12 @@ const HomeScreen = ({navigation}) => {
         <Text>Home screen will include...</Text>
         <Text>Weekly progress bar</Text>
         <Text>Schedule view</Text>
-        <Text>Start the shimmy time</Text>
-        <Pressable
-          onPress={() => navigation.navigate('Shimmytime')}>
-            <Text>Test</Text>
-			  </Pressable>
+        <ShimmyCard>
+          <Pressable
+            onPress={() => navigation.navigate('Shimmytime')}>
+              <Text>Test</Text>
+          </Pressable>
+        </ShimmyCard>
       </View>
     );
   }};
