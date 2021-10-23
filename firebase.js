@@ -22,18 +22,25 @@ export async function getCollection(id) {
   console.log(data, 'collection')
 }
 
-export async function createShimmy(schedule) {
-  const { time } = schedule
-  await db.collection('schedules').add({
-    uid: 123,
-    repeats: "monday",
-    time: time || null,
-    is_active: true,
-    created_on: firebase.database.ServerValue.TIMESTAMP
-  })
+export async function createShimmy(uid, schedule) {
+  const { time, days } = schedule
+  console.log(`These are the days: ${days}`)
+  console.log(Object.values(days))
+  return days.map((day) => {
+   db.collection("schedules")
+    .doc(uid)
+    .update(
+    {[day]: {
+      scheduled: "0800",
+      is_active: true}
+    })
+  });
 }
 
-export async function getShimmy(uid){
-  const shimmys = await db.collection('schedules').doc().where.('uid', '==', uid).get()
-  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+export async function getShimmy(uid) {
+  const snapshot = await db
+    .collection("schedules")
+    .where("uid", "==", uid)
+    .get();
+  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 }

@@ -8,11 +8,15 @@ import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold
   } from '@expo-google-fonts/baloo-2';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as db from '../firebase'
 
 const HomeScreen = ({navigation}) => {
   navigation.setOptions({
     headerLeft: () => null,
   })
+
+  console.log(db.getShimmy("123"))
 
   let [fontsLoaded] = useFonts({
 		Baloo2_400Regular,
@@ -98,6 +102,17 @@ const HomeScreen = ({navigation}) => {
             }}
           component={HomeScreen} 
         />
+
+      <Tab.Screen
+        name="Shimmy"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: 'Updates',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="bell" color={color} size={size} />
+          ),
+        }}
+      />
         <Tab.Screen 
           name="Settings" 
           options={{
@@ -115,7 +130,6 @@ const HomeScreen = ({navigation}) => {
 }
 
 // Styles
-
 const styles = StyleSheet.create({
     screen: {
       flex: 1,

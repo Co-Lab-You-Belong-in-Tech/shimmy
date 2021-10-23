@@ -8,12 +8,11 @@ import { useFonts,
   } from '@expo-google-fonts/baloo-2';
 import { Montserrat_400Regular } from '@expo-google-fonts/montserrat';
 
-const DEFAULT_SCHED = {
-  uid: 123,
-  repeats: true,
-  time: null
+const DEFAULT_SCHED = 
+{
+  days: ["Monday", "Tuesday"],
+  time: "0900"
 }
-
 const TIME = "0900"
 
 const Time = ({navigation}) => {
@@ -23,8 +22,8 @@ const Time = ({navigation}) => {
   const handleCreateShedule = () => {
     try {
       setSubmitting(true)
-      db.createShimmy(schedule)
-      setSchedule(DEFAULT_LIST)
+      db.createShimmy("123", schedule)
+      setSchedule(DEFAULT_SCHED)
       setSubmitting(false)
     } catch(error) {
       console.error(error)
@@ -33,7 +32,7 @@ const Time = ({navigation}) => {
   }}
 
   const handleChange = (value) => {
-    setSchedule(prevState => ({ ...prevState, time: value }))
+    setSchedule(prevState => ({ ...prevState }))
   } 
 
   const styles = StyleSheet.create({
@@ -111,10 +110,13 @@ const Time = ({navigation}) => {
        When would you like to have shimmy time?
       </Text>
       <Text style={styles.subtext}>This is a 1 minute movement break.</Text>
-        <TimeSelector value={value} onValueChange={(value) => handleChange(value)} style={styles.picker}/>
+        <TimeSelector value="0900" onValueChange={(value) => handleChange(value)} style={styles.picker}/>
         <Pressable 
         style={styles.button}
-        onPress={handleCreateShedule
+        onPress={ () => {
+          handleCreateShedule()
+          navigation.navigate('Home')
+          }
         }></Pressable>
     </View>
     );
