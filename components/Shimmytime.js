@@ -3,24 +3,18 @@ import { View, Text, Animated, StyleSheet } from 'react-native';
 import { HeaderBackButton } from '@react-navigation/elements';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import SvgComponent from './SvgComponent';
+import AudioPlayer from './AudioPlayer';
 
 const Shimmytime = ({navigation}) => {
   const [isPlaying, setIsPlaying] = useState(true);
 
-  const buttonClickedHandler = value => {
-    const dateRef = firebase.database().ref("date");
-    const date = {
-      date: value,
-    }
-    dateRef.push(date)
-  };
-  
   navigation.setOptions({
     headerLeft: () => <HeaderBackButton onPress={() => navigation.navigate('Home')}/>
   })
 
   return (
     <View style={styles.container}>
+      <Text>Shimmy time</Text>
       <Text>Move in a way that feels good to you!</Text>
       <SvgComponent style={{position: 'absolute', marginBottom: 20}} />
       <CountdownCircleTimer
@@ -37,7 +31,7 @@ const Shimmytime = ({navigation}) => {
             return <Text style={{marginTop:'70%'}}>{`${minutes < 1 ? 0 : '01' }:${seconds}`}</Text>
           }}
       </CountdownCircleTimer>
-      <Text>Music title go here</Text>
+      <AudioPlayer />
     </View>
   )
 }
