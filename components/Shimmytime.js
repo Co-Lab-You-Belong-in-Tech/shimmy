@@ -3,26 +3,29 @@ import { View, Text, Animated, StyleSheet } from 'react-native';
 import { HeaderBackButton } from '@react-navigation/elements';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import SvgComponent from './SvgComponent';
+import AudioPlayer from './AudioPlayer';
+import { LinearGradient } from 'expo-linear-gradient';
+import Ring from './Ring';
 
 const Shimmytime = ({navigation}) => {
   const [isPlaying, setIsPlaying] = useState(true);
 
-  const buttonClickedHandler = value => {
-    const dateRef = firebase.database().ref("date");
-    const date = {
-      date: value,
-    }
-    dateRef.push(date)
-  };
-  
   navigation.setOptions({
+    headerTransparent: true,
     headerLeft: () => <HeaderBackButton onPress={() => navigation.navigate('Home')}/>
   })
-
   return (
     <View style={styles.container}>
-      <Text>Move in a way that feels good to you!</Text>
-      <SvgComponent style={{position: 'absolute', marginBottom: 20}} />
+      <LinearGradient
+        // Background Linear Gradient
+        //background: linear-gradient(167.96deg, #FFD5A0 9.37%, #FFEBAF 50%, #B6E8E9 90.1%);
+        colors={['#FFD5A0', '#FFEBAF', '#B6E8E9']}
+        start={{ x: 0, y: 0}}
+        style={styles.background}
+      />
+  
+      <Ring size={300}/>
+      <SvgComponent style={{position: 'absolute', marginBottom: 256}} />
       <CountdownCircleTimer
           isPlaying={isPlaying}
           duration={60}
@@ -37,7 +40,9 @@ const Shimmytime = ({navigation}) => {
             return <Text style={{marginTop:'70%'}}>{`${minutes < 1 ? 0 : '01' }:${seconds}`}</Text>
           }}
       </CountdownCircleTimer>
-      <Text>Music title go here</Text>
+      <Text>Shimmy time</Text>
+      <Text>Move in a way that feels good to you!</Text>
+      <AudioPlayer />
     </View>
   )
 }
@@ -49,6 +54,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#ecf0f1',
     padding: 8,
+  },
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 700,
   },
   });
 export default Shimmytime;

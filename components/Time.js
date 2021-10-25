@@ -8,6 +8,7 @@ import { useFonts,
   } from '@expo-google-fonts/baloo-2';
 import { Montserrat_400Regular } from '@expo-google-fonts/montserrat';
 import { Div, ThemeProvider, Button, Input, Icon, Image } from 'react-native-magnus';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const Time = ({navigation}) => {
   const [daysArray, setDaysArray] = useState([]);
@@ -61,6 +62,15 @@ const Time = ({navigation}) => {
       lineHeight: 21,
       letterSpacing: 0.25,
       color: 'white',
+    },
+    background: {
+      position: 'absolute',
+      zIndex: -1, // works on ios
+      elevation: -1, // works on android
+      left: 0,
+      right: 0,
+      top: 0,
+      height: 700,
     }
 });
 
@@ -81,6 +91,13 @@ const Time = ({navigation}) => {
   } else {
   return (
     <View style={styles.container}>
+      <LinearGradient
+        // Background Linear Gradient
+        //background: linear-gradient(167.96deg, #FFD5A0 9.37%, #FFEBAF 50%, #B6E8E9 90.1%);
+        colors={['#FFD5A0', '#FFEBAF', '#B6E8E9']}
+        start={{ x: 0, y: 0}}
+        style={styles.background}
+      />
       <Text style={styles.headertext}>
        When would you like to have shimmy time?
       </Text>
