@@ -5,14 +5,15 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import SvgComponent from './SvgComponent';
 import AudioPlayer from './AudioPlayer';
 import { LinearGradient } from 'expo-linear-gradient';
+import Ring from './Ring';
 
 const Shimmytime = ({navigation}) => {
   const [isPlaying, setIsPlaying] = useState(true);
 
   navigation.setOptions({
+    headerTransparent: true,
     headerLeft: () => <HeaderBackButton onPress={() => navigation.navigate('Home')}/>
   })
-//background: linear-gradient(167.96deg, #FFD5A0 9.37%, #FFEBAF 50%, #B6E8E9 90.1%);
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -22,9 +23,9 @@ const Shimmytime = ({navigation}) => {
         start={{ x: 0, y: 0}}
         style={styles.background}
       />
-      <Text>Shimmy time</Text>
-      <Text>Move in a way that feels good to you!</Text>
-      <SvgComponent style={{position: 'absolute', marginBottom: 20}} />
+  
+      <Ring size={300}/>
+      <SvgComponent style={{position: 'absolute', marginBottom: 256}} />
       <CountdownCircleTimer
           isPlaying={isPlaying}
           duration={60}
@@ -39,6 +40,8 @@ const Shimmytime = ({navigation}) => {
             return <Text style={{marginTop:'70%'}}>{`${minutes < 1 ? 0 : '01' }:${seconds}`}</Text>
           }}
       </CountdownCircleTimer>
+      <Text>Shimmy time</Text>
+      <Text>Move in a way that feels good to you!</Text>
       <AudioPlayer />
     </View>
   )
@@ -57,7 +60,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: 600,
+    height: 700,
   },
   });
 export default Shimmytime;

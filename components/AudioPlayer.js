@@ -120,7 +120,7 @@ export default function App() {
           <ActivityIndicator size={'small'} color={'red'} />
         ) : (
           <>
-            <Button title="Play Song" onPress={PlayAudio} />
+            <Button title="Play" onPress={PlayAudio} />
             <Button title="Pause Song" onPress={PauseAudio} />
             <Text>Currently Playing : {CurrentSong.name}</Text>
           </>
