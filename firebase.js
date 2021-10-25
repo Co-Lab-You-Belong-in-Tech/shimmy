@@ -16,6 +16,11 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
+// Helpers to incriment or decrement
+
+const increment = firebase.firestore.FieldValue.increment(1);
+const decrement = firebase.firestore.FieldValue.increment(-1);
+
 export async function getCollection(id) {
   const snapshot = await db.collection(id).get()
   const data = snapshot.map(doc => ({ id: doc.id, ...doc.data()}))
@@ -37,10 +42,17 @@ export async function createShimmy(uid, schedule) {
   });
 }
 
+
+export async function createInsight(uid) {
+  console.log(db.collection('insights').doc(uid).get('streak'))
+  // statsRef.add({ reads: increment })
+}
+
 export async function getShimmy(uid) {
+  
   const snapshot = await db
     .collection("schedules")
     .where("uid", "==", uid)
     .get();
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  return snapshot.docs.map((doc) => (console.log({ id: doc.id, ...doc.data() })));
 }

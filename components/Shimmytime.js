@@ -28,13 +28,15 @@ const Shimmytime = ({navigation}) => {
           duration={60}
           colors='#FFA332'
           rotation='counterclockwise'
-          onComplete={() => [true]}
+          onComplete={
+            // Make a call to Firecloud to send to 'insight'/uid/'streak', ...'completed'
+            () => [true]}
           size={300}
           >
           {({ remainingTime }) => {
             const minutes = Math.floor(remainingTime / 60);
             const seconds = remainingTime % 60;
-            return <Text style={{marginTop:'70%'}}>{`${minutes < 1 ? 0 : '01' }:${seconds}`}</Text>
+            return <Text style={{marginTop:'70%'}}>{`${minutes < 1 ? 0 : '01' }:0${seconds}`}</Text>
           }}
       </CountdownCircleTimer>
       <Text>Music title go here</Text>
