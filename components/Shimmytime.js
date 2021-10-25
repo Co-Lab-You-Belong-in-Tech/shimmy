@@ -24,7 +24,7 @@ const Shimmytime = ({navigation}) => {
         style={styles.background}
       />
   
-      <Ring size={300}/>
+      <Ring size={300} style={{position: 'absolute', marginTop: 10}}/>
       <SvgComponent style={{position: 'absolute', marginBottom: 256}} />
       <CountdownCircleTimer
           isPlaying={isPlaying}
@@ -33,6 +33,7 @@ const Shimmytime = ({navigation}) => {
           rotation='counterclockwise'
           onComplete={() => [true]}
           size={300}
+          
           >
           {({ remainingTime }) => {
             const minutes = Math.floor(remainingTime / 60);

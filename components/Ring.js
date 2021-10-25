@@ -7,6 +7,7 @@ const Ring = () => {
   
   const styles = StyleSheet.create({
     circle: {
+      elevation: 0,
       position: 'absolute',
       width: 300,
       height: 300,
