@@ -1,32 +1,25 @@
 import React, { useState } from 'react';
 import AppLoading from 'expo-app-loading';
-import { View, Text, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Pressable } from 'react-native';
 import { Picker } from "@react-native-picker/picker";
-import firebase from '../firebase';
 import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold,
   } from '@expo-google-fonts/baloo-2';
 import { Montserrat_400Regular } from '@expo-google-fonts/montserrat';
+import { Div, ThemeProvider, Button, Input, Icon, Image } from 'react-native-magnus';
 
 const Time = ({navigation}) => {
   const [daysArray, setDaysArray] = useState([]);
   const [time, setTime] = useState(false);
 
-  const createShimmyTime = (day, time) => {
-    return fsRef.collection('shimmytimes')
-      .add({
-        uid: auth.currentUser.uid,
-        scheduled_time: time,
-        scheduled_day: day,
-        created_on: firebase.firestore.FieldValue.serverTimestamp(),
-        completed: false
-      });
-  };
+  navigation.setOptions({
+    headerShown: false,
+  })
 
   const styles = StyleSheet.create({
     headertext: {
-      fontSize: 26,
+      fontSize: 19,
       lineHeight: 30,
       fontFamily: 'Baloo2_400Regular'
     },
@@ -41,6 +34,12 @@ const Time = ({navigation}) => {
       alignItems: 'center',
       justifyContent: 'center',
       fontFamily: 'Baloo2_400Regular'
+    },
+    picker: {
+      width: 300,
+      backgroundColor: '#FFF0E0',
+      borderColor: 'black',
+      borderWidth: 1,
     },
     row: {
       flexDirection: "row",
@@ -57,27 +56,6 @@ const Time = ({navigation}) => {
       backgroundColor: '#15999B',
       width: 200
     },
-    timeButton:{
-      alignItems: 'center',
-      justifyContent: 'center',
-      margin: 75,
-      paddingVertical: 16,
-      paddingHorizontal: 32,
-      borderRadius: 25,
-      elevation: 3,
-      backgroundColor: '#15999B',
-      width: 200
-    },
-    roundButton: {
-      margin: 10,
-      width: 45,
-      height: 45,
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 1,
-      borderRadius: 50,
-      backgroundColor: '#076264',
-    },
     buttonText: {
       fontSize: 16,
       lineHeight: 21,
@@ -85,11 +63,18 @@ const Time = ({navigation}) => {
       color: 'white',
     }
 });
+
   let [fontsLoaded] = useFonts({
     Baloo2_400Regular,
     Baloo2_600SemiBold,
     Montserrat_400Regular
   });
+
+  const theme = {
+    colors: {
+      shimmygreen: "#076264"
+    }
+  }
 
   if (!fontsLoaded) {
     return <AppLoading />; 
@@ -103,7 +88,6 @@ const Time = ({navigation}) => {
         <Picker
           selectedValue={time}
           onValueChange={(value) => setTime(value)}
-          mode="dropdown" // Android only
           style={styles.picker}
         >
           <Picker.Item label="09:00" value="09:00" />
@@ -112,82 +96,20 @@ const Time = ({navigation}) => {
           <Picker.Item label="11:00" value="11:00" />
         </Picker>
         <View style={styles.row}>
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Sunday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>S</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Monday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>M</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Tuesday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>T</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Wednesday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>W</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Thursday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>T</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Friday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>F</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-                // Need to complete logic
-              daysArray.includes('Saturday') ?
-              setDaysArray(prev => ([...prev])) :
-              setDaysArray(prev => ([...prev, 'Saturday']))
-              console.log(daysArray)
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>S</Text>
-          </TouchableOpacity>
-          </View>
-          <View>
- 
-          </View>
+        <ThemeProvider theme={theme}>
+          <SafeAreaView style={{ flex: 1 }}>
+            <Div row alignItems="center" justifyContent="center" flexDir="row" mt="xl">
+            <Button bg="shimmygreen" h={40} w={40}  ml="md" rounded="circle">S</Button>
+            <Button bg="shimmygreen" h={40} w={40}  ml="md" rounded="circle">M</Button>
+            <Button bg="shimmygreen" h={40} w={40}  ml="md" rounded="circle">T</Button>
+            <Button bg="shimmygreen" h={40} w={40}  ml="md" rounded="circle">W</Button>
+            <Button bg="shimmygreen" h={40} w={40}  ml="md" rounded="circle">T</Button>
+            <Button bg="shimmygreen" h={40} w={40}  ml="md" rounded="circle">F</Button>
+            <Button bg="shimmygreen" h={40} w={40} ml="md" rounded="circle">S</Button>
+            </Div>
+          </SafeAreaView>
+        </ThemeProvider>
+      </View>
           <Pressable 
             style={styles.button}
             onPress={() => {
