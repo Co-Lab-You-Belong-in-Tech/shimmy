@@ -11,10 +11,6 @@ const ShimmyCard = () => {
         <View style={styles.infoStyle}>
           <Text style={styles.titleStyle}>Shimmy Time</Text>
           <Text style={styles.categoryStyle}>1 min</Text>
-          <View style={styles.iconLabelStyle}>
-            <IconLabel name="ios-time" label="label" color={iconColor} />
-            <IconLabel name="ios-pin" label="label" color={iconColor} />
-          </View>
         </View>
       </View>
     </View>

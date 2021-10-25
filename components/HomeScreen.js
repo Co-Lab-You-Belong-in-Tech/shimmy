@@ -8,7 +8,27 @@ import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold
   } from '@expo-google-fonts/baloo-2';
-  import { Icon } from 'react-native-elements'
+  import { 
+    Montserrat_100Thin,
+    Montserrat_100Thin_Italic,
+    Montserrat_200ExtraLight,
+    Montserrat_200ExtraLight_Italic,
+    Montserrat_300Light,
+    Montserrat_300Light_Italic,
+    Montserrat_400Regular,
+    Montserrat_400Regular_Italic,
+    Montserrat_500Medium,
+    Montserrat_500Medium_Italic,
+    Montserrat_600SemiBold,
+    Montserrat_600SemiBold_Italic,
+    Montserrat_700Bold,
+    Montserrat_700Bold_Italic,
+    Montserrat_800ExtraBold,
+    Montserrat_800ExtraBold_Italic,
+    Montserrat_900Black,
+    Montserrat_900Black_Italic 
+  } from '@expo-google-fonts/montserrat'
+import { Icon } from 'react-native-elements'
 import ShimmyCard from './ShimmyCard';
 
 const HomeScreen = ({navigation}) => {
@@ -19,7 +39,8 @@ const HomeScreen = ({navigation}) => {
 
   let [fontsLoaded] = useFonts({
 		Baloo2_400Regular,
-		Baloo2_600SemiBold
+		Baloo2_600SemiBold,
+    Montserrat_600SemiBold
 	});
 
   function HomeScreen() {
@@ -29,9 +50,7 @@ const HomeScreen = ({navigation}) => {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text style={{ position: 'absolute', top: 20, fontFamily: 'Baloo2_600SemiBold', fontSize: 29, lineHeight: 40 }}>Shimmy</Text>
-        <Text>Home screen will include...</Text>
-        <Text>Weekly progress bar</Text>
-        <Text>Schedule view</Text>
+        <Text style={{ fontFamily: 'Montserrat_600SemiBold', fontSize: 16, lineHeight: 24 }}>Today's schedule:</Text>
         <ShimmyCard>
           <Pressable
             onPress={() => navigation.navigate('Shimmytime')}>
@@ -81,10 +100,10 @@ const HomeScreen = ({navigation}) => {
           <View
           style={{
               position: 'absolute',
-              bottom: 10, // space from bottombar
-              height: 68,
-              width: 68,
-              borderRadius: 68,
+              bottom: 20, // space from bottombar
+              height: 56,
+              width: 56,
+              borderRadius: 56,
               color: '#15999B',
               justifyContent: 'center',
               alignItems: 'center',
@@ -100,7 +119,7 @@ const HomeScreen = ({navigation}) => {
   options={{
       tabBarLabel: '',
       tabBarIcon: ({ color }) => (
-          <Icon name="perm-identity" color={color} size={26} />
+          <Icon name="insights" color={color} size={26} />
       )
   }}
   component={HomeScreen} />
@@ -149,6 +168,7 @@ const styles = StyleSheet.create({
     }
 });
 const customTabBarStyle = {
+  height: 84,
   activeTintColor: '#0091EA',
   inactiveTintColor: 'gray',
   style: {backgroundColor: 'white' },
