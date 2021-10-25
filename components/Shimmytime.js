@@ -16,6 +16,7 @@ const Shimmytime = ({navigation}) => {
   };
   
   navigation.setOptions({
+      headerShown: false,
     headerLeft: () => <HeaderBackButton onPress={() => navigation.navigate('Home')}/>
   })
 

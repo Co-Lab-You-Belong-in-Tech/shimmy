@@ -26,7 +26,7 @@ const offset = 40;
 const radius = 20;
 const styles = StyleSheet.create({
   container: {
-    width: deviceWidth - 20,
+    width: deviceWidth - 50,
     alignItems: 'center',
     marginTop: 25,
   },
@@ -37,11 +37,11 @@ const styles = StyleSheet.create({
     borderRadius: radius,
     shadowColor: '#000',
     shadowOffset: {
-      width: 5,
-      height: 5,
+      width: 2,
+      height: 2
     },
-    shadowOpacity: 0.75,
-    shadowRadius: 5,
+    shadowOpacity: 0.65,
+    shadowRadius: 1,
     elevation: 9,
   },
   titleStyle: {

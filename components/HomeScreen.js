@@ -3,24 +3,24 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
-import { View, Text, Pressable, StyleSheet} from 'react-native';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold
   } from '@expo-google-fonts/baloo-2';
+  import { Icon } from 'react-native-elements'
 import ShimmyCard from './ShimmyCard';
 
 const HomeScreen = ({navigation}) => {
   navigation.setOptions({
+    headerShow: false,
     headerLeft: () => null,
   })
-
 
   let [fontsLoaded] = useFonts({
 		Baloo2_400Regular,
 		Baloo2_600SemiBold
 	});
-
 
   function HomeScreen() {
     if (!fontsLoaded) {
@@ -59,61 +59,52 @@ const HomeScreen = ({navigation}) => {
   const Tab = createBottomTabNavigator();
 
   return (
-
     <Tab.Navigator
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused, color, size }) => {
-        if (route.name === 'Home') {
-          return (
-            <Ionicons
-              name={
-                focused
-                  ? 'ios-information-circle'
-                  : 'ios-information-circle-outline'
-              }
-              size={size}
-              color={color}
-            />
-          );
-        } else if (route.name === 'Settings') {
-          return (
-            <Ionicons
-              name={focused ? 'ios-list-box' : 'ios-list'}
-              size={size}
-              color={color}
-            />
-          );
-        }
-      },
-      tabBarInactiveTintColor: 'gray',
-      tabBarActiveTintColor: 'tomato',
-    })}
-  >
-        <Tab.Screen 
-          name="Home"
-          options={{
-            cardStyle: { backgroundColor: '#FFEBAF' },
-            headerTitle:"", 
-            headerTransparent: true,
-            headerStyle: {
-              borderBottomWidth: 0
-            },
-            }}
-          component={HomeScreen} 
-        />
-        <Tab.Screen 
-          name="Settings" 
-          options={{
-          cardStyle: { backgroundColor: '#FFEBAF' },
-          headerTitle:"", 
-          headerTransparent: true,
-          headerStyle: {
-            borderBottomWidth: 0
-          },
+    initialRouteName="Home"
+    activeColor="#fff"
+    tabBarOptions={customTabBarStyle}
+    shifting="false">
+    <Tab.Screen
+  name="Home"
+  options={{
+      tabBarLabel: '',
+      tabBarIcon: ({ color }) => (
+          <Icon name="home" color={color} size={26} />
+      )
+  }}
+  component={HomeScreen} />
+  <Tab.Screen
+  name="Add"
+  options={{
+      tabBarLabel: '',
+      tabBarIcon: ({ color }) => (
+          <View
+          style={{
+              position: 'absolute',
+              bottom: 10, // space from bottombar
+              height: 68,
+              width: 68,
+              borderRadius: 68,
+              color: '#15999B',
+              justifyContent: 'center',
+              alignItems: 'center',
           }}
-        component={SettingsScreen} />
-      </Tab.Navigator>
-
+          >
+          <Icon name="add-circle" color="#15999B" size={68}/>
+          </View>
+      )
+  }}
+  component={HomeScreen}/>
+  <Tab.Screen
+  name="Profile"
+  options={{
+      tabBarLabel: '',
+      tabBarIcon: ({ color }) => (
+          <Icon name="perm-identity" color={color} size={26} />
+      )
+  }}
+  component={HomeScreen} />
+  </Tab.Navigator>
   );
 }
 
@@ -157,5 +148,10 @@ const styles = StyleSheet.create({
       color: 'white',
     }
 });
+const customTabBarStyle = {
+  activeTintColor: '#0091EA',
+  inactiveTintColor: 'gray',
+  style: {backgroundColor: 'white' },
+}
 
 export default HomeScreen;

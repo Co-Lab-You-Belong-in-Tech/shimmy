@@ -8,21 +8,11 @@ import { useFonts,
 	Baloo2_600SemiBold,
   } from '@expo-google-fonts/baloo-2';
 import { Montserrat_400Regular } from '@expo-google-fonts/montserrat';
+import { Div, ThemeProvider, Button, Input, Icon, Image } from 'react-native-magnus';
 
 const Time = ({navigation}) => {
   const [daysArray, setDaysArray] = useState([]);
   const [time, setTime] = useState(false);
-
-  const createShimmyTime = (day, time) => {
-    return fsRef.collection('shimmytimes')
-      .add({
-        uid: auth.currentUser.uid,
-        scheduled_time: time,
-        scheduled_day: day,
-        created_on: firebase.firestore.FieldValue.serverTimestamp(),
-        completed: false
-      });
-  };
 
   const styles = StyleSheet.create({
     headertext: {
@@ -85,11 +75,18 @@ const Time = ({navigation}) => {
       color: 'white',
     }
 });
+
   let [fontsLoaded] = useFonts({
     Baloo2_400Regular,
     Baloo2_600SemiBold,
     Montserrat_400Regular
   });
+
+  const theme = {
+    colors: {
+      shimmygreen: "#076264"
+    }
+  }
 
   if (!fontsLoaded) {
     return <AppLoading />; 
@@ -112,82 +109,16 @@ const Time = ({navigation}) => {
           <Picker.Item label="11:00" value="11:00" />
         </Picker>
         <View style={styles.row}>
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Sunday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>S</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Monday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>M</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Tuesday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>T</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Wednesday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>W</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Thursday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>T</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-              let value = "Friday";
-              buttonClickedHandler(value);
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>F</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-              onPress={() => { 
-                // Need to complete logic
-              daysArray.includes('Saturday') ?
-              setDaysArray(prev => ([...prev])) :
-              setDaysArray(prev => ([...prev, 'Saturday']))
-              console.log(daysArray)
-              }}
-              style={styles.roundButton}
-              >
-              <Text style={styles.buttonText}>S</Text>
-          </TouchableOpacity>
-          </View>
-          <View>
- 
-          </View>
+        <ThemeProvider theme={theme}>
+        <Button bg="shimmygreen"/>
+        <Button bg="shimmygreen"/>
+        <Button bg="shimmygreen"/>
+        <Button bg="shimmygreen"/>
+        <Button bg="shimmygreen"/>
+        <Button bg="shimmygreen"/>
+        <Button bg="shimmygreen"/>
+        </ThemeProvider>
+      </View>
           <Pressable 
             style={styles.button}
             onPress={() => {

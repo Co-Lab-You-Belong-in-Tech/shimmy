@@ -2,12 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View, Button} from 'react-native';
 import { NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Welcome from './components/Welcome';
-import Name from './components/Name';
-import Time from './components/Time';
 import HomeScreen from './components/HomeScreen';
 import Shimmytime from './components/Shimmytime';
-import LoginScreen from './components/LoginScreen';
+import Modal from "react-native-modal";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,40 +12,6 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="LoginScreen"
-          component={LoginScreen}
-        />
-        <Stack.Screen 
-          options={{headerShown: false}} 
-          name="Welcome" 
-          component={Welcome}
-        />
-        <Stack.Screen  
-          options={{
-            cardStyle: { backgroundColor: '#FFEBAF' },
-            headerTitle:"", 
-            headerTransparent: true,
-            headerStyle: {
-              borderBottomWidth: 0
-            },
-            }}
-          name="Name" 
-          component={Name}
-        />
-        <Stack.Screen 
-          name="Time" 
-          options={{
-            cardStyle: { backgroundColor: '#FFEBAF' },
-            headerTitle:"", 
-            headerTransparent: true,
-            headerStyle: {
-              borderBottomWidth: 0
-            },
-            }}
-          component={Time}
-        />
         <Stack.Screen 
           name="Home" 
           options={{
