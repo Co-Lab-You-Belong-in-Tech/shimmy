@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import TimeSelector from './TimeSelector'
 import * as db from '../firebase';
@@ -7,33 +7,77 @@ import { useFonts,
 	Baloo2_600SemiBold,
   } from '@expo-google-fonts/baloo-2';
 import { Montserrat_400Regular } from '@expo-google-fonts/montserrat';
-
-const DEFAULT_SCHED = 
-{
-  days: ["Monday", "Tuesday"],
-  time: "0900"
-}
-const TIME = "0900"
+import uuid from 'react-native-uuid';
 
 const Time = ({navigation}) => {
-  const [schedule, setSchedule] = React.useState(DEFAULT_SCHED)
-  const [submitting, setSubmitting] = React.useState(false)
+  const [schedule, setSchedule] = useState({
+    "day": {
+      scheduled: null,
+      is_active: false,
+      shimmy_id: uuid.v4()
+    }
+  })
 
-  const handleCreateShedule = () => {
-    try {
-      setSubmitting(true)
-      db.createShimmy("123", schedule)
-      setSchedule(DEFAULT_SCHED)
-      setSubmitting(false)
-    } catch(error) {
-      console.error(error)
-    } finally {
-      setSubmitting(false)
-  }}
+  const [submitting, setSubmitting] = React.useState(false)
+  const [time, setTime] = React.useState("0900")
+
+  const [sunday, setSunday] = useState(false)
+  const [monday, setMonday] = React.useState(false)
+  const [tuesday, setTuesday] = React.useState(false)
+  const [wednesday, setWednesday] = React.useState(false)
+  const [thursday, setThursday] = React.useState(false)
+  const [friday, setFriday] = React.useState(false)
+  const [saturday, setSaturday] = React.useState(false)
 
   const handleChange = (value) => {
-    setSchedule(prevState => ({ ...prevState }))
-  } 
+    setTime(value)
+  }
+  
+  // I don't know what I am doing here! How do I get my state to change, and remain set?
+  useEffect(() => {
+    }, [
+      schedule, 
+      sunday, 
+      monday, 
+      tuesday, 
+      wednesday, 
+      thursday, 
+      friday, 
+      saturday
+    ]
+  );
+
+  const handleCreateShedule = () => {
+    // Sets the date to true, dummy for now
+    setSunday(true)
+    // If true then set schedule with useState...
+    if (sunday) {
+      setSchedule({
+        "Sunday": {
+          scheduled: time,
+          is_active: true,
+          shimmy_id: uuid.v4()
+        }
+      });
+      setSubmitting(true)
+      // The call to firestore, I expect this to be the set state
+      // But instead it uses the default state
+      db.createShimmy("test321", schedule);
+      setSubmitting(false)
+    }
+    if (monday) {
+      setSchedule({
+        "Monday": {
+          scheduled: time,
+          is_active: true,
+          shimmy_id: uuid.v4()
+        }
+      });
+      setSubmitting(true)
+      db.createShimmy("test321", schedule);
+      setSubmitting(false)
+    }
+  }
 
   const styles = StyleSheet.create({
     headertext: {
@@ -114,6 +158,7 @@ const Time = ({navigation}) => {
         <Pressable 
         style={styles.button}
         onPress={ () => {
+          // This handles the "submission"
           handleCreateShedule()
           navigation.navigate('Home')
           }

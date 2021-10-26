@@ -9,9 +9,6 @@ import SvgComponent from './SvgComponent';
 import * as db from '../firebase'
 
 const Welcome = ({navigation}) => {
-	
-	db.createInsight("123")
-
 	let [fontsLoaded] = useFonts({
 		Baloo2_400Regular,
 		Baloo2_600SemiBold

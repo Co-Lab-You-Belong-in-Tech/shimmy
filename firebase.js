@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import 'firebase/database';
 import "firebase/firestore";
+import uuid from 'react-native-uuid';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCebMW7UmMCrtJJj4sWstYVExOyMLE_Vc4",
@@ -17,42 +18,43 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 // Helpers to incriment or decrement
-
 const increment = firebase.firestore.FieldValue.increment(1);
 const decrement = firebase.firestore.FieldValue.increment(-1);
 
-export async function getCollection(id) {
-  const snapshot = await db.collection(id).get()
-  const data = snapshot.map(doc => ({ id: doc.id, ...doc.data()}))
-  console.log(data, 'collection')
-}
 
-export async function createShimmy(uid, schedule) {
-  const { time, days } = schedule
-  console.log(`These are the days: ${days}`)
-  console.log(Object.values(days))
-  return days.map((day) => {
-   db.collection("schedules")
+// Creates shimmy.
+export async function createShimmy(uid, schedule){
+  const snapshot = await db
+    .collection("schedules")
     .doc(uid)
-    .update(
-    {[day]: {
-      scheduled: "0800",
-      is_active: true}
-    })
-  });
+    .set(schedule);
+  return console.log(snapshot)
 }
 
-
-export async function createInsight(uid) {
-  console.log(db.collection('insights').doc(uid).get('streak'))
-  // statsRef.add({ reads: increment })
-}
-
-export async function getShimmy(uid) {
-  
+// Returns shimmys.
+export async function getShimmy(uid){
   const snapshot = await db
     .collection("schedules")
     .where("uid", "==", uid)
     .get();
   return snapshot.docs.map((doc) => (console.log({ id: doc.id, ...doc.data() })));
 }
+
+// Selects and edits shimmy.
+export async function editShimmy(shimmyId, newtime){
+
+};
+
+// Selects and deletes shimmy.
+export async function deleteShimmy(shimmyId){
+
+};
+
+// Creates shimmy complete.
+export async function shimmyCompleted(uid, shimmyId){
+  const snapshot = await db
+  .collection('insights')
+  .doc(uid)
+  .get('streak')
+};
+  
