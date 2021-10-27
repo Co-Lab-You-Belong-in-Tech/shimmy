@@ -54,26 +54,7 @@ const HomeScreen = ({navigation}) => {
         <Text>Home screen will include...</Text>
         <Text>Weekly progress bar</Text>
         <Text>Schedule view</Text>
-        <View style={styles.container}>
-          <View style={styles.switchContainer}>
-              {Object.keys(componentMap).map(type => (
-                  <TouchableOpacity
-                      key={type}
-                      style={[
-                          styles.switch,
-                          {
-                              backgroundColor:
-                                  mode === type ? 'grey' : 'white',
-                          },
-                      ]}
-                      onPress={() => setMode(type)}
-                  >
-                      <Text>{type}</Text>
-                  </TouchableOpacity>
-              ))}
-          </View>
           {renderExample()}
-      </View>
         <Pressable style={styles.scheduleButton}
           onPress={() => navigation.navigate('Shimmytime')}>
             <Text>SHIMMYTIME TEST</Text>

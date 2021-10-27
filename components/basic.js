@@ -11,7 +11,7 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 
 export default function Basic() {
     const [listData, setListData] = useState(
-        Array(20)
+        Array(5)
             .fill('')
             .map((_, i) => ({ key: `${i}`, text: `item #${i}` }))
     );
@@ -38,17 +38,17 @@ export default function Basic() {
         <TouchableHighlight
             onPress={() => console.log('You touched me')}
             style={styles.rowFront}
-            underlayColor={'#AAA'}
+            underlayColor={'#FAF9F6'}
         >
             <View>
-                <Text>I am {data.item.text} in a SwipeListView</Text>
+                <Text>1 min.</Text>
+                <Text>Shimmy time</Text>
             </View>
         </TouchableHighlight>
     );
 
     const renderHiddenItem = (data, rowMap) => (
         <View style={styles.rowBack}>
-            <Text>Left</Text>
             <TouchableOpacity
                 style={[styles.backRightBtn, styles.backRightBtnLeft]}
                 onPress={() => closeRow(rowMap, data.item.key)}
@@ -63,7 +63,8 @@ export default function Basic() {
             </TouchableOpacity>
         </View>
     );
-
+		
+    // Renders shimmy cards
     return (
         <View style={styles.container}>
             <SwipeListView
@@ -81,25 +82,26 @@ export default function Basic() {
     );
 }
 
+// Styles cards
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
-        flex: 1,
+        width: 311,
+        backgroundColor: 'FAF9F6'
     },
     backTextWhite: {
-        color: '#FFF',
+        color: 'black',
     },
     rowFront: {
         alignItems: 'center',
-        backgroundColor: '#CCC',
-        borderBottomColor: 'black',
-        borderBottomWidth: 1,
+        borderRadius: 20,
+        backgroundColor: '#B6E8E9',
         justifyContent: 'center',
-        height: 50,
+        marginBottom: 10,
+        height: 64,
     },
     rowBack: {
         alignItems: 'center',
-        backgroundColor: '#DDD',
+        backgroundColor: 'FAF9F6',
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -114,11 +116,11 @@ const styles = StyleSheet.create({
         width: 75,
     },
     backRightBtnLeft: {
-        backgroundColor: 'blue',
+        backgroundColor: 'FAF9F6',
         right: 75,
     },
     backRightBtnRight: {
-        backgroundColor: 'red',
+        backgroundColor: 'FAF9F6',
         right: 0,
     },
 });
