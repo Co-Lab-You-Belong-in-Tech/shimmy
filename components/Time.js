@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import AppLoading from 'expo-app-loading';
 import { View, Text, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import firebase from '../firebase';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { useFonts,
+	Baloo2_400Regular,
+	Baloo2_600SemiBold,
+  } from '@expo-google-fonts/baloo-2';
+import { Montserrat_400Regular } from '@expo-google-fonts/montserrat';
 
 const Time = ({navigation}) => {
   const [date, setDate] = useState(new Date(1598051730000));
@@ -37,10 +42,24 @@ const Time = ({navigation}) => {
   };
 
   const styles = StyleSheet.create({
-    screen: {
+    headertext: {
+      fontSize: 26,
+      lineHeight: 30,
+      fontFamily: 'Baloo2_400Regular'
+    },
+
+    subtext: {
+      fontSize: 16,
+      lineHeight: 24,
+      fontFamily: 'Montserrat_400Regular'
+    },
+  
+    container: {
+      backgroundColor: '#FFEBAF',
       flex: 1,
-      justifyContent: 'center',
       alignItems: 'center',
+      justifyContent: 'center',
+      fontFamily: 'Baloo2_400Regular'
     },
     row: {
       flexDirection: "row",
@@ -49,6 +68,7 @@ const Time = ({navigation}) => {
     button: {
       alignItems: 'center',
       justifyContent: 'center',
+      margin: 30,
       paddingVertical: 16,
       paddingHorizontal: 32,
       borderRadius: 25,
@@ -59,7 +79,7 @@ const Time = ({navigation}) => {
     timeButton:{
       alignItems: 'center',
       justifyContent: 'center',
-      margin: 58,
+      margin: 75,
       paddingVertical: 16,
       paddingHorizontal: 32,
       borderRadius: 25,
@@ -68,7 +88,7 @@ const Time = ({navigation}) => {
       width: 200
     },
     roundButton: {
-      margin: 15,
+      margin: 10,
       width: 45,
       height: 45,
       justifyContent: 'center',
@@ -85,8 +105,20 @@ const Time = ({navigation}) => {
     }
 });
 
+  let [fontsLoaded] = useFonts({
+    Baloo2_400Regular,
+    Baloo2_600SemiBold,
+    Montserrat_400Regular
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />; 
+  } else {
   return (
-    <View style={styles.screen}>
+    <View style={styles.container}>
+      <Text style={styles.headertext}>When would you like to have
+shimmy time?</Text>
+<Text style={styles.subtext}>This is a 1 minute movement break.</Text>
       <Pressable style={styles.timeButton} onPress={showTimepicker}>
         <Text style={styles.buttonText}>Select a Time</Text> 
       </Pressable>
@@ -180,7 +212,7 @@ const Time = ({navigation}) => {
                 <Text style={styles.buttonText}>Next</Text>
             </Pressable>
     </View>
-  );
+  )};
 };
 
 export default Time;
