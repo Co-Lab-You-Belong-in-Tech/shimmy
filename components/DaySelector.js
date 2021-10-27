@@ -1,10 +1,18 @@
 import * as React from "react";
+import { useState } from "react";
 import { View, Text, ScrollView, Pressable, StyleSheet } from "react-native";
+import firebase from "../firebase";
 
 const DaySelector = () => {
 	const week = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 	const date = new Date();
 	const today = date.getDay();
+	const fsRef = firebase.firestore();
+	const auth = firebase.auth();
+
+	const handleClick = () => {
+		setviewDate(true);
+	};
 
 	return (
 		<View style={styles.container}>
@@ -53,9 +61,9 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		margin: 5,
-		borderStyle: "solid",
-		borderWidth: 3,
-		borderColor: "#15999B",
+		// borderStyle: "solid",
+		// borderWidth: 3,
+		// borderColor: "#15999B",
 	},
 
 	dot: {
