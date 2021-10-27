@@ -6,15 +6,27 @@ import {
     TouchableHighlight,
     View,
 } from 'react-native';
-
+import { 
+	useFonts,
+	Montserrat_500Medium,
+	Montserrat_600SemiBold } from '@expo-google-fonts/montserrat';
 import { SwipeListView } from 'react-native-swipe-list-view';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Basic() {
+const ShimmyCard = () => {
+    const navigation = useNavigation();
+    
+    // TODO Firebase call for scheduled Shimmytimes.
     const [listData, setListData] = useState(
-        Array(5)
-            .fill('')
-            .map((_, i) => ({ key: `${i}`, text: `item #${i}` }))
+        Array(3)
+          .fill('')
     );
+
+    // Loads fonts
+    let [fontsLoaded] = useFonts({
+        Montserrat_500Medium,
+        Montserrat_600SemiBold
+    });
 
     const closeRow = (rowMap, rowKey) => {
         if (rowMap[rowKey]) {
@@ -34,26 +46,30 @@ export default function Basic() {
         console.log('This row opened', rowKey);
     };
 
-    const renderItem = data => (
+    // Renders each ShimmyTime
+    const renderItem = (data) => (
         <TouchableHighlight
-            onPress={() => console.log('You touched me')}
+            onPress={() => navigation.navigate('ShimmyTime')}
             style={styles.rowFront}
             underlayColor={'#FAF9F6'}
         >
-            <View>
-                <Text>1 min.</Text>
-                <Text>Shimmy time</Text>
-            </View>
+        <View>
+          <Text style={{  marginLeft: 20, fontFamily: 'Montserrat_600SemiBold', whiteSpace: "pre-line" }}>2PM    <View>
+              <Text style={{ marginLeft: 30, fontFamily: 'Montserrat_500Medium'}}>{'     Shimmy Time'}
+              </Text></View>
+            </Text>
+        </View>
         </TouchableHighlight>
     );
-
+    
+    // Renders Edit, Delete for Shimmytimes
     const renderHiddenItem = (data, rowMap) => (
         <View style={styles.rowBack}>
             <TouchableOpacity
                 style={[styles.backRightBtn, styles.backRightBtnLeft]}
                 onPress={() => closeRow(rowMap, data.item.key)}
             >
-                <Text style={styles.backTextWhite}>Close</Text>
+                <Text style={styles.backTextWhite}>Edit</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={[styles.backRightBtn, styles.backRightBtnRight]}
@@ -69,6 +85,7 @@ export default function Basic() {
         <View style={styles.container}>
             <SwipeListView
                 data={listData}
+                keyExtractor={item => item.id}
                 renderItem={renderItem}
                 renderHiddenItem={renderHiddenItem}
                 leftOpenValue={75}
@@ -91,8 +108,10 @@ const styles = StyleSheet.create({
     backTextWhite: {
         color: 'black',
     },
+		rowLeft: {
+
+		},
     rowFront: {
-        alignItems: 'center',
         borderRadius: 20,
         backgroundColor: '#B6E8E9',
         justifyContent: 'center',
@@ -124,3 +143,5 @@ const styles = StyleSheet.create({
         right: 0,
     },
 });
+
+export default ShimmyCard;

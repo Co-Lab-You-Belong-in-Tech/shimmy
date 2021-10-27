@@ -4,7 +4,7 @@ import { HeaderBackButton } from '@react-navigation/elements';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import SvgComponent from './SvgComponent';
 
-const Shimmytime = ({navigation}) => {
+const ShimmyTime = ({navigation}) => {
   const [isPlaying, setIsPlaying] = useState(true);
 
   const buttonClickedHandler = value => {
@@ -53,4 +53,5 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   });
-export default Shimmytime;
+  
+export default ShimmyTime;

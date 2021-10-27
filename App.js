@@ -6,7 +6,8 @@ import Welcome from './components/Welcome';
 import Name from './components/Name';
 import Time from './components/Time';
 import HomeScreen from './components/HomeScreen';
-import Shimmytime from './components/Shimmytime';
+import ShimmyTime from './components/ShimmyTime';
+import ShimmyCard from './components/ShimmyCard';
 
 const Stack = createNativeStackNavigator();
 
@@ -55,8 +56,8 @@ export default function App() {
             }}
           component={HomeScreen}/>
         <Stack.Screen
-          name="Shimmytime"
-          component={Shimmytime}
+          name="ShimmyTime"
+          component={ShimmyTime}
           options={{
             headerTitle: "shimmy time",
             headerTitleAlign: 'center',
@@ -64,6 +65,10 @@ export default function App() {
               borderBottomWidth: 0,
             },
           }}
+        />
+        <Stack.Screen
+          name="ShimmyCard"
+          component={ShimmyCard}
         />
         {/* <Stack.Screen name="Date" component={}/>
         <Stack.Screen name="Notification" component={}/>

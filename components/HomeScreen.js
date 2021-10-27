@@ -17,27 +17,17 @@ import { useFonts,
   } from '@expo-google-fonts/baloo-2';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as db from '../firebase'
-import Basic from './basic';
-
-
+import ShimmyCard from './ShimmyCard';
 
 const HomeScreen = ({navigation}) => {
   navigation.setOptions({
     headerLeft: () => null,
   })
 
-  const componentMap = {
-    Basic,
-  };
-
-  console.log(db.getShimmy("123"))
-
   let [fontsLoaded] = useFonts({
 		Baloo2_400Regular,
 		Baloo2_600SemiBold
 	});
-
-  const [mode, setMode] = React.useState('Basic');
 
   const renderExample = () => {
       const Component = componentMap[mode];
@@ -54,11 +44,8 @@ const HomeScreen = ({navigation}) => {
         <Text>Home screen will include...</Text>
         <Text>Weekly progress bar</Text>
         <Text>Schedule view</Text>
-          {renderExample()}
-        <Pressable style={styles.scheduleButton}
-          onPress={() => navigation.navigate('Shimmytime')}>
-            <Text>SHIMMYTIME TEST</Text>
-			  </Pressable>
+          <ShimmyCard />
+
       </View>
     );
   }};
