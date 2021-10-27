@@ -1152,7 +1152,7 @@
 
 "@expo-google-fonts/montserrat@^0.2.0":
   version "0.2.0"
-  resolved "https://registry.npmjs.org/@expo-google-fonts/montserrat/-/montserrat-0.2.0.tgz"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/montserrat/-/montserrat-0.2.0.tgz#5408c3c287f25bda14a77a8dd98c510e27df773a"
   integrity sha512-wOdsgn1HCZlyqZ5MpdxGR1NOgJvTcDlOtW760gPKSrRnfB+HAC8YsCaRz+TEtARcjINmt7EjuwVv1T4Hty+jCQ==
 
 "@expo/config-plugins@2.0.4":
@@ -1935,7 +1935,7 @@
 
 "@react-native-picker/picker@1.16.1":
   version "1.16.1"
-  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.16.1.tgz#cc5d05b0d651445afa519c67824d8af3e43fa10c"
+  resolved "https://registry.npmjs.org/@react-native-picker/picker/-/picker-1.16.1.tgz"
   integrity sha512-sk07ARwL0cMXwkXsqcxyprL/KiEVD0xRFXFqznTnZs1YXqwxEqz6GiGtq2vQlK64CzXDpHX8gw1QQz47abBY1Q==
 
 "@react-native/normalize-color@^2.0.0":
@@ -5513,6 +5513,16 @@ react-native-svg@12.1.1:
   dependencies:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
+
+react-native-swipe-list-view@^3.2.9:
+  version "3.2.9"
+  resolved "https://registry.npmjs.org/react-native-swipe-list-view/-/react-native-swipe-list-view-3.2.9.tgz"
+  integrity sha512-SjAEuHc/D6ovp+RjDUhfNmw6NYOntdT7+GFhfMGfP/BSLMuMWynpzJy9GKQeyB8sI78T6Lzip21TVbongOg1Mw==
+
+react-native-uuid@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/react-native-uuid/-/react-native-uuid-2.0.1.tgz"
+  integrity sha512-cptnoIbL53GTCrWlb/+jrDC6tvb7ypIyzbXNJcpR3Vab0mkeaaVd5qnB3f0whXYzS+SMoSQLcUUB0gEWqkPC0g==
 
 react-native-web@~0.13.12:
   version "0.13.18"

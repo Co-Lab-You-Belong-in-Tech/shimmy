@@ -3,23 +3,36 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
-import { View, Text, Pressable, StyleSheet} from 'react-native';
+import {
+  Pressable,
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold
   } from '@expo-google-fonts/baloo-2';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as db from '../firebase'
+import ShimmyCard from './ShimmyCard';
 
 const HomeScreen = ({navigation}) => {
   navigation.setOptions({
     headerLeft: () => null,
   })
 
-
   let [fontsLoaded] = useFonts({
 		Baloo2_400Regular,
 		Baloo2_600SemiBold
 	});
 
+  const renderExample = () => {
+      const Component = componentMap[mode];
+      return <Component />;
+  };
 
   function HomeScreen() {
     if (!fontsLoaded) {
@@ -31,11 +44,8 @@ const HomeScreen = ({navigation}) => {
         <Text>Home screen will include...</Text>
         <Text>Weekly progress bar</Text>
         <Text>Schedule view</Text>
-        <Text>Start the shimmy time</Text>
-        <Pressable
-          onPress={() => navigation.navigate('Shimmytime')}>
-            <Text>Test</Text>
-			  </Pressable>
+          <ShimmyCard />
+
       </View>
     );
   }};
@@ -50,6 +60,7 @@ const HomeScreen = ({navigation}) => {
         <Text>Toggle notifications</Text>
         <Text>Allow music</Text>
         <Text>Allow haptics</Text>
+        <Pressable style={styles.scheduleButton}></Pressable>
       </View>
     );
   }
@@ -99,6 +110,17 @@ const HomeScreen = ({navigation}) => {
             }}
           component={HomeScreen} 
         />
+
+      <Tab.Screen
+        name="Shimmy"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: 'Updates',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="bell" color={color} size={size} />
+          ),
+        }}
+      />
         <Tab.Screen 
           name="Settings" 
           options={{
@@ -116,7 +138,6 @@ const HomeScreen = ({navigation}) => {
 }
 
 // Styles
-
 const styles = StyleSheet.create({
     screen: {
       flex: 1,
@@ -147,13 +168,35 @@ const styles = StyleSheet.create({
       borderRadius: 100,
       backgroundColor: 'lightgrey',
     },
+    scheduleButton: {
+      postion: 'absolute',
+      marginBottom: 10,
+      width: 56,
+      height: 56,
+      borderRadius: 50,
+      backgroundColor: '#15999B',
+    },
     buttonText: {
       fontSize: 16,
       lineHeight: 21,
       fontWeight: 'bold',
       letterSpacing: 0.25,
       color: 'white',
-    }
+    },
+    switchContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      marginVertical: 50,
+      flexWrap: 'wrap',
+  },
+  switch: {
+      alignItems: 'center',
+      borderWidth: 1,
+      borderColor: 'black',
+      marginVertical: 2,
+      paddingVertical: 10,
+      width: Dimensions.get('window').width / 3,
+  },
 });
 
 export default HomeScreen;

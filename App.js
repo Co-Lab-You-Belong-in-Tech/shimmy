@@ -6,8 +6,8 @@ import Welcome from './components/Welcome';
 import Name from './components/Name';
 import Time from './components/Time';
 import HomeScreen from './components/HomeScreen';
-import Shimmytime from './components/Shimmytime';
-import LoginScreen from './components/LoginScreen';
+import ShimmyTime from './components/ShimmyTime';
+import ShimmyCard from './components/ShimmyCard';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,11 +15,6 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="LoginScreen"
-          component={LoginScreen}
-        />
         <Stack.Screen 
           options={{headerShown: false}} 
           name="Welcome" 
@@ -61,8 +56,8 @@ export default function App() {
             }}
           component={HomeScreen}/>
         <Stack.Screen
-          name="Shimmytime"
-          component={Shimmytime}
+          name="ShimmyTime"
+          component={ShimmyTime}
           options={{
             headerTitle: "shimmy time",
             headerTitleAlign: 'center',
@@ -70,6 +65,10 @@ export default function App() {
               borderBottomWidth: 0,
             },
           }}
+        />
+        <Stack.Screen
+          name="ShimmyCard"
+          component={ShimmyCard}
         />
         {/* <Stack.Screen name="Date" component={}/>
         <Stack.Screen name="Notification" component={}/>
@@ -82,7 +81,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFEBAF',
+    backgroundColor: '#FAF9F6',
     alignItems: 'center',
     justifyContent: 'center',
   },
