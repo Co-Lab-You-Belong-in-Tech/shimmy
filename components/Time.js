@@ -8,6 +8,7 @@ import { useFonts,
   } from '@expo-google-fonts/baloo-2';
 import { Montserrat_400Regular } from '@expo-google-fonts/montserrat';
 import uuid from 'react-native-uuid';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const Time = ({navigation}) => {
   const [schedule, setSchedule] = useState({
@@ -146,10 +147,27 @@ const Time = ({navigation}) => {
       borderWidth: 1,
       borderColor: "#666",
     },
-  })
+    background: {
+      position: 'absolute',
+      zIndex: -1, // works on ios
+      elevation: -1, // works on android
+      left: 0,
+      right: 0,
+      top: 0,
+      height: 1000,
+    }
+    } 
+  )
 
   return (
     <View style={styles.container}>
+      <LinearGradient
+        // Background Linear Gradient
+        //background: linear-gradient(167.96deg, #FFD5A0 9.37%, #FFEBAF 50%, #B6E8E9 90.1%);
+        colors={['#FFD5A0', '#FFEBAF', '#B6E8E9']}
+        start={{ x: -1, y: 0}}
+        style={styles.background}
+      />
       <Text style={styles.headertext}>
        When would you like to have shimmy time?
       </Text>

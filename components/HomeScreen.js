@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Icon } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
 import {
@@ -21,18 +22,13 @@ import ShimmyCard from './ShimmyCard';
 
 const HomeScreen = ({navigation}) => {
   navigation.setOptions({
-    headerLeft: () => null,
+    headerShown: false,
   })
 
   let [fontsLoaded] = useFonts({
 		Baloo2_400Regular,
 		Baloo2_600SemiBold
 	});
-
-  const renderExample = () => {
-      const Component = componentMap[mode];
-      return <Component />;
-  };
 
   function HomeScreen() {
     if (!fontsLoaded) {
@@ -41,11 +37,7 @@ const HomeScreen = ({navigation}) => {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text style={{ position: 'absolute', top: 20, fontFamily: 'Baloo2_600SemiBold', fontSize: 29, lineHeight: 40 }}>Shimmy</Text>
-        <Text>Home screen will include...</Text>
-        <Text>Weekly progress bar</Text>
-        <Text>Schedule view</Text>
-          <ShimmyCard />
-
+        <ShimmyCard />
       </View>
     );
   }};
@@ -68,72 +60,55 @@ const HomeScreen = ({navigation}) => {
   const Tab = createBottomTabNavigator();
 
   return (
-
     <Tab.Navigator
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused, color, size }) => {
-        if (route.name === 'Home') {
-          return (
-            <Ionicons
-              name={
-                focused
-                  ? 'ios-information-circle'
-                  : 'ios-information-circle-outline'
-              }
-              size={size}
-              color={color}
-            />
-          );
-        } else if (route.name === 'Settings') {
-          return (
-            <Ionicons
-              name={focused ? 'ios-list-box' : 'ios-list'}
-              size={size}
-              color={color}
-            />
-          );
-        }
-      },
-      tabBarInactiveTintColor: 'gray',
-      tabBarActiveTintColor: 'tomato',
-    })}
-  >
-        <Tab.Screen 
-          name="Home"
-          options={{
-            cardStyle: { backgroundColor: '#FFEBAF' },
-            headerTitle:"", 
-            headerTransparent: true,
-            headerStyle: {
-              borderBottomWidth: 0
-            },
-            }}
-          component={HomeScreen} 
-        />
-
-      <Tab.Screen
-        name="Shimmy"
-        component={HomeScreen}
-        options={{
-          tabBarLabel: 'Updates',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={size} />
-          ),
-        }}
-      />
-        <Tab.Screen 
-          name="Settings" 
-          options={{
-          cardStyle: { backgroundColor: '#FFEBAF' },
-          headerTitle:"", 
-          headerTransparent: true,
-          headerStyle: {
-            borderBottomWidth: 0
-          },
+    initialRouteName="Home"
+    activeColor="#fff"
+    tabBarOptions={customTabBarStyle}
+    options={{
+      headerTransparent: true}
+    }
+    shifting="false">
+    <Tab.Screen
+  name="Home"
+  options={{
+      tabBarLabel: '',
+      tabBarIcon: ({ color }) => (
+          <Icon name="home" color={color} size={26} />
+      )
+  }}
+  component={HomeScreen} />
+  <Tab.Screen
+  name="Add"
+  options={{
+      tabBarLabel: '',
+      tabBarIcon: ({ color }) => (
+          <View
+          style={{
+              position: 'absolute',
+              bottom: 20, // space from bottombar
+              height: 56,
+              width: 56,
+              borderRadius: 100,
+              color: '#15999B',
+              justifyContent: 'center',
+              alignItems: 'center',
           }}
-        component={SettingsScreen} />
-      </Tab.Navigator>
-
+          >
+          <Icon name="add-circle" color="#15999B" size={68}/>
+          </View>
+      )
+  }}
+  component={HomeScreen}/>
+  <Tab.Screen
+  name="Profile"
+  options={{
+      tabBarLabel: '',
+      tabBarIcon: ({ color }) => (
+          <Icon name="insights" color={color} size={26} />
+      )
+  }}
+  component={HomeScreen} />
+  </Tab.Navigator>
   );
 }
 
@@ -197,6 +172,14 @@ const styles = StyleSheet.create({
       paddingVertical: 10,
       width: Dimensions.get('window').width / 3,
   },
-});
+})
+
+const customTabBarStyle = {
+  height: 84,
+  activeTintColor: '#0091EA',
+  inactiveTintColor: 'gray',
+  style: {backgroundColor: 'white' },
+}
+;
 
 export default HomeScreen;

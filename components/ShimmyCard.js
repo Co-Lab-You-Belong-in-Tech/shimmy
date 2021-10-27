@@ -81,7 +81,8 @@ const ShimmyCard = () => {
     );
 		
     // Renders shimmy cards
-    return (
+    return (<View>
+        <Text style={{ right: 20, fontFamily: 'Montserrat_600SemiBold', fontSize: 16, lineHeight: 24, marginBottom: 16 }}>Today's schedule:</Text>
         <View style={styles.container}>
             <SwipeListView
                 data={listData}
@@ -96,6 +97,7 @@ const ShimmyCard = () => {
                 onRowDidOpen={onRowDidOpen}
             />
         </View>
+    </View>
     );
 }
 
