@@ -3,23 +3,46 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
-import { View, Text, Pressable, StyleSheet} from 'react-native';
+import {
+  Pressable,
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold
   } from '@expo-google-fonts/baloo-2';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as db from '../firebase'
+import Basic from './basic';
+
+
 
 const HomeScreen = ({navigation}) => {
   navigation.setOptions({
     headerLeft: () => null,
   })
 
+  const componentMap = {
+    Basic,
+  };
+
+  console.log(db.getShimmy("123"))
+
   let [fontsLoaded] = useFonts({
 		Baloo2_400Regular,
 		Baloo2_600SemiBold
 	});
+
+  const [mode, setMode] = React.useState('Basic');
+
+  const renderExample = () => {
+      const Component = componentMap[mode];
+      return <Component />;
+  };
 
   function HomeScreen() {
     if (!fontsLoaded) {
@@ -31,7 +54,26 @@ const HomeScreen = ({navigation}) => {
         <Text>Home screen will include...</Text>
         <Text>Weekly progress bar</Text>
         <Text>Schedule view</Text>
-        <Text>Start the shimmy time</Text>
+        <View style={styles.container}>
+          <View style={styles.switchContainer}>
+              {Object.keys(componentMap).map(type => (
+                  <TouchableOpacity
+                      key={type}
+                      style={[
+                          styles.switch,
+                          {
+                              backgroundColor:
+                                  mode === type ? 'grey' : 'white',
+                          },
+                      ]}
+                      onPress={() => setMode(type)}
+                  >
+                      <Text>{type}</Text>
+                  </TouchableOpacity>
+              ))}
+          </View>
+          {renderExample()}
+      </View>
         <Pressable style={styles.scheduleButton}
           onPress={() => navigation.navigate('Shimmytime')}>
             <Text>SHIMMYTIME TEST</Text>
@@ -172,7 +214,21 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       letterSpacing: 0.25,
       color: 'white',
-    }
+    },
+    switchContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      marginVertical: 50,
+      flexWrap: 'wrap',
+  },
+  switch: {
+      alignItems: 'center',
+      borderWidth: 1,
+      borderColor: 'black',
+      marginVertical: 2,
+      paddingVertical: 10,
+      width: Dimensions.get('window').width / 3,
+  },
 });
 
 export default HomeScreen;

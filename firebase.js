@@ -17,7 +17,7 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-// Helpers to incriment or decrement
+// Helpers.
 const increment = firebase.firestore.FieldValue.increment(1);
 const decrement = firebase.firestore.FieldValue.increment(-1);
 
@@ -58,3 +58,9 @@ export async function shimmyCompleted(uid, shimmyId){
   .get('streak')
 };
   
+export async function getMusic(){
+  const snapshot = await db
+    .collection("music")
+    .get()
+    return snapshot.docs.map((doc) => (console.log({ id: doc.id, ...doc.data() })));
+}
