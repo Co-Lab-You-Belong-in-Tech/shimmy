@@ -19,6 +19,7 @@ import { useFonts,
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as db from '../firebase'
 import ShimmyCard from './ShimmyCard';
+import DaySelector from './DaySelector';
 
 const HomeScreen = ({navigation}) => {
   navigation.setOptions({
@@ -34,9 +35,11 @@ const HomeScreen = ({navigation}) => {
     if (!fontsLoaded) {
       return <AppLoading />; 
     } else {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ position: 'absolute', top: 20, fontFamily: 'Baloo2_600SemiBold', fontSize: 29, lineHeight: 40 }}>Shimmy</Text>
+      return (
+      <View style={{ alignItems: 'center' }}>
+        <Text style={{ position: 'absolute', top: 20, fontFamily: 'Baloo2_600SemiBold', fontSize: 29, lineHeight: 40, height: 10 }}>Shimmy</Text>
+        <View style={{ padding: 40 }}></View>
+        <DaySelector />
         <ShimmyCard />
       </View>
     );

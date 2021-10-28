@@ -54,7 +54,7 @@ const ShimmyCard = () => {
             underlayColor={'#FAF9F6'}
         >
         <View>
-          <Text style={{  marginLeft: 20, fontFamily: 'Montserrat_600SemiBold', whiteSpace: "pre-line" }}>2PM    <View>
+          <Text style={{  marginLeft: 20, fontFamily: 'Montserrat_600SemiBold', whiteSpace: "pre-line" }}>{ Math.floor(Math.random() * 4)}PM    <View>
               <Text style={{ marginLeft: 30, fontFamily: 'Montserrat_500Medium'}}>{'     Shimmy Time'}
               </Text></View>
             </Text>
@@ -121,14 +121,17 @@ const styles = StyleSheet.create({
         height: 64,
     },
     rowBack: {
+        borderRadius: 2,
         alignItems: 'center',
         backgroundColor: 'FAF9F6',
+        marginBottom: 10,
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingLeft: 15,
     },
     backRightBtn: {
+        borderRadius: 20,
         alignItems: 'center',
         bottom: 0,
         justifyContent: 'center',
@@ -137,11 +140,11 @@ const styles = StyleSheet.create({
         width: 75,
     },
     backRightBtnLeft: {
-        backgroundColor: 'FAF9F6',
+        backgroundColor: 'orange',
         right: 75,
     },
     backRightBtnRight: {
-        backgroundColor: 'FAF9F6',
+        backgroundColor: 'red',
         right: 0,
     },
 });
