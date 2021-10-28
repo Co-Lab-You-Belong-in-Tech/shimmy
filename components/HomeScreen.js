@@ -4,42 +4,29 @@ import {
 	heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Icon } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
 import AppLoading from "expo-app-loading";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import {
+	Pressable,
+	Dimensions,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+} from "react-native";
 import {
 	useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold,
 } from "@expo-google-fonts/baloo-2";
-import {
-	Montserrat_100Thin,
-	Montserrat_100Thin_Italic,
-	Montserrat_200ExtraLight,
-	Montserrat_200ExtraLight_Italic,
-	Montserrat_300Light,
-	Montserrat_300Light_Italic,
-	Montserrat_400Regular,
-	Montserrat_400Regular_Italic,
-	Montserrat_500Medium,
-	Montserrat_500Medium_Italic,
-	Montserrat_600SemiBold,
-	Montserrat_600SemiBold_Italic,
-	Montserrat_700Bold,
-	Montserrat_700Bold_Italic,
-	Montserrat_800ExtraBold,
-	Montserrat_800ExtraBold_Italic,
-	Montserrat_900Black,
-	Montserrat_900Black_Italic,
-} from "@expo-google-fonts/montserrat";
-import { Icon } from "react-native-elements";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import * as db from "../firebase";
 import ShimmyCard from "./ShimmyCard";
-import DaySelector from "./DaySelector";
 
 const HomeScreen = ({ navigation }) => {
 	navigation.setOptions({
-		headerShow: false,
-		headerLeft: () => null,
+		headerShown: false,
 	});
 
 	let [fontsLoaded] = useFonts({
@@ -67,21 +54,7 @@ const HomeScreen = ({ navigation }) => {
 					>
 						Shimmy
 					</Text>
-					<DaySelector />
-					<Text
-						style={{
-							fontFamily: "Montserrat_600SemiBold",
-							fontSize: 16,
-							lineHeight: 24,
-						}}
-					>
-						Today's schedule:
-					</Text>
-					<ShimmyCard>
-						<Pressable onPress={() => navigation.navigate("Shimmytime")}>
-							<Text>Test</Text>
-						</Pressable>
-					</ShimmyCard>
+					<ShimmyCard />
 				</View>
 			);
 		}
@@ -107,6 +80,7 @@ const HomeScreen = ({ navigation }) => {
 				<Text>Toggle notifications</Text>
 				<Text>Allow music</Text>
 				<Text>Allow haptics</Text>
+				<Pressable style={styles.scheduleButton}></Pressable>
 			</View>
 		);
 	}
@@ -118,6 +92,9 @@ const HomeScreen = ({ navigation }) => {
 			initialRouteName='Home'
 			activeColor='#fff'
 			tabBarOptions={customTabBarStyle}
+			options={{
+				headerTransparent: true,
+			}}
 			shifting='false'
 		>
 			<Tab.Screen
@@ -141,7 +118,7 @@ const HomeScreen = ({ navigation }) => {
 								bottom: 20, // space from bottombar
 								height: 56,
 								width: 56,
-								borderRadius: 56,
+								borderRadius: 100,
 								color: "#15999B",
 								justifyContent: "center",
 								alignItems: "center",
@@ -168,7 +145,6 @@ const HomeScreen = ({ navigation }) => {
 };
 
 // Styles
-
 const styles = StyleSheet.create({
 	screen: {
 		flex: 1,
@@ -199,6 +175,14 @@ const styles = StyleSheet.create({
 		borderRadius: 100,
 		backgroundColor: "lightgrey",
 	},
+	scheduleButton: {
+		postion: "absolute",
+		marginBottom: 10,
+		width: 56,
+		height: 56,
+		borderRadius: 50,
+		backgroundColor: "#15999B",
+	},
 	buttonText: {
 		fontSize: 16,
 		lineHeight: 21,
@@ -206,12 +190,26 @@ const styles = StyleSheet.create({
 		letterSpacing: 0.25,
 		color: "white",
 	},
+	switchContainer: {
+		flexDirection: "row",
+		justifyContent: "center",
+		marginVertical: 50,
+		flexWrap: "wrap",
+	},
+	switch: {
+		alignItems: "center",
+		borderWidth: 1,
+		borderColor: "black",
+		marginVertical: 2,
+		paddingVertical: 10,
+		width: Dimensions.get("window").width / 3,
+	},
 });
+
 const customTabBarStyle = {
 	height: 84,
 	activeTintColor: "#0091EA",
 	inactiveTintColor: "gray",
 	style: { backgroundColor: "white" },
 };
-
 export default HomeScreen;

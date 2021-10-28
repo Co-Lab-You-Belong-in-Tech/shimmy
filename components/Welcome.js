@@ -6,6 +6,7 @@ import { useFonts,
 	Baloo2_600SemiBold
   } from '@expo-google-fonts/baloo-2';
 import SvgComponent from './SvgComponent';
+import * as db from '../firebase'
 
 const Welcome = ({navigation}) => {
 	let [fontsLoaded] = useFonts({
