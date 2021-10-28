@@ -1,88 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
-import TimeSelector from './TimeSelector'
-import * as db from '../firebase';
+import React, { useState } from 'react';
+import AppLoading from 'expo-app-loading';
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Pressable } from 'react-native';
+import { Picker } from "@react-native-picker/picker";
 import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold,
   } from '@expo-google-fonts/baloo-2';
 import { Montserrat_400Regular } from '@expo-google-fonts/montserrat';
-import uuid from 'react-native-uuid';
+import { Div, ThemeProvider, Button, Input, Icon, Image } from 'react-native-magnus';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const Time = ({navigation}) => {
-  const [schedule, setSchedule] = useState({
-    "day": {
-      scheduled: null,
-      is_active: false,
-      shimmy_id: uuid.v4()
-    }
+  const [daysArray, setDaysArray] = useState([]);
+  const [time, setTime] = useState(false);
+
+  navigation.setOptions({
+    headerShown: false,
   })
-
-  const [submitting, setSubmitting] = React.useState(false)
-  const [time, setTime] = React.useState("0900")
-
-  const [sunday, setSunday] = useState(false)
-  const [monday, setMonday] = React.useState(false)
-  const [tuesday, setTuesday] = React.useState(false)
-  const [wednesday, setWednesday] = React.useState(false)
-  const [thursday, setThursday] = React.useState(false)
-  const [friday, setFriday] = React.useState(false)
-  const [saturday, setSaturday] = React.useState(false)
-
-  const handleChange = (value) => {
-    setTime(value)
-  }
-  
-  // I don't know what I am doing here! How do I get my state to change, and remain set?
-  useEffect(() => {
-    }, [
-      schedule, 
-      sunday, 
-      monday, 
-      tuesday, 
-      wednesday, 
-      thursday, 
-      friday, 
-      saturday
-    ]
-  );
-
-  const handleCreateShedule = () => {
-    // Sets the date to true, dummy for now
-    setSunday(true)
-    // If true then set schedule with useState...
-    if (sunday) {
-      setSchedule({
-        "Sunday": {
-          scheduled: time,
-          is_active: true,
-          shimmy_id: uuid.v4()
-        }
-      });
-      setSubmitting(true)
-      // The call to firestore, I expect this to be the set state
-      // But instead it uses the default state
-      db.createShimmy("test321", schedule);
-      setSubmitting(false)
-    }
-    if (monday) {
-      setSchedule({
-        "Monday": {
-          scheduled: time,
-          is_active: true,
-          shimmy_id: uuid.v4()
-        }
-      });
-      setSubmitting(true)
-      db.createShimmy("test321", schedule);
-      setSubmitting(false)
-    }
-  }
 
   const styles = StyleSheet.create({
     headertext: {
-      fontSize: 26,
+      fontSize: 19,
       lineHeight: 30,
       fontFamily: 'Baloo2_400Regular'
     },
@@ -97,6 +35,10 @@ const Time = ({navigation}) => {
       alignItems: 'center',
       justifyContent: 'center',
       fontFamily: 'Baloo2_400Regular'
+    },
+    picker: {
+      width: 150,
+      backgroundColor: 'white',
     },
     row: {
       flexDirection: "row",
@@ -113,39 +55,11 @@ const Time = ({navigation}) => {
       backgroundColor: '#15999B',
       width: 200
     },
-    timeButton: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      margin: 75,
-      paddingVertical: 16,
-      paddingHorizontal: 32,
-      borderRadius: 25,
-      elevation: 3,
-      backgroundColor: '#15999B',
-      width: 200
-    },
-    roundButton: {
-      margin: 10,
-      width: 45,
-      height: 45,
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 1,
-      borderRadius: 50,
-      backgroundColor: '#076264',
-    },
     buttonText: {
       fontSize: 16,
       lineHeight: 21,
       letterSpacing: 0.25,
       color: 'white',
-    },
-    picker: {
-      marginVertical: 30,
-      width: 300,
-      padding: 10,
-      borderWidth: 1,
-      borderColor: "#666",
     },
     background: {
       position: 'absolute',
@@ -156,32 +70,99 @@ const Time = ({navigation}) => {
       top: 0,
       height: 1000,
     }
-    } 
-  )
+});
 
+  let [fontsLoaded] = useFonts({
+    Baloo2_400Regular,
+    Baloo2_600SemiBold,
+    Montserrat_400Regular
+  });
+
+  const theme = {
+    colors: {
+      shimmygreen: "#076264"
+    }
+  }
+
+  if (!fontsLoaded) {
+    return <AppLoading />; 
+  } else {
   return (
     <View style={styles.container}>
       <LinearGradient
         // Background Linear Gradient
         //background: linear-gradient(167.96deg, #FFD5A0 9.37%, #FFEBAF 50%, #B6E8E9 90.1%);
         colors={['#FFD5A0', '#FFEBAF', '#B6E8E9']}
-        start={{ x: -1, y: 0}}
+        start={{ x: -1, y: 1}}
         style={styles.background}
       />
       <Text style={styles.headertext}>
        When would you like to have shimmy time?
       </Text>
       <Text style={styles.subtext}>This is a 1 minute movement break.</Text>
-        <TimeSelector value="0900" onValueChange={(value) => handleChange(value)} style={styles.picker}/>
-        <Pressable 
-        style={styles.button}
-        onPress={ () => {
-          // This handles the "submission"
-          handleCreateShedule()
-          navigation.navigate('Home')
-          }
-        }></Pressable>
+        <Picker
+          selectedValue={time}
+          onValueChange={(value) => setTime(value)}
+          style={styles.picker}
+        >
+          <Picker.Item label="09:00" value="0900" />
+          <Picker.Item label="09:15" value="0915" />
+          <Picker.Item label="09:30" value="0930" />
+          <Picker.Item label="09:45" value="0945" />
+          <Picker.Item label="10:00" value="1000" />
+          <Picker.Item label="10:15" value="1015" />
+          <Picker.Item label="10:30" value="1030" />
+          <Picker.Item label="10:45" value="1045" />
+          <Picker.Item label="12:00" value="1200" />
+          <Picker.Item label="12:15" value="1215" />
+          <Picker.Item label="12:30" value="1230" />
+          <Picker.Item label="12:45" value="1245" />
+          <Picker.Item label="13:00" value="1300" />
+          <Picker.Item label="13:15" value="1315" />
+          <Picker.Item label="13:30" value="1330" />
+          <Picker.Item label="13:45" value="1345" />
+          <Picker.Item label="14:00" value="1400" />
+          <Picker.Item label="14:15" value="1415" />
+          <Picker.Item label="14:30" value="1430" />
+          <Picker.Item label="14:45" value="1445" />
+          <Picker.Item label="15:00" value="1500" />
+          <Picker.Item label="15:15" value="1515" />
+          <Picker.Item label="15:30" value="1530" />
+          <Picker.Item label="15:45" value="1545" />
+          <Picker.Item label="16:00" value="1600" />
+          <Picker.Item label="16:15" value="1615" />
+          <Picker.Item label="16:30" value="1630" />
+          <Picker.Item label="16:45" value="1645" />
+          <Picker.Item label="17:00" value="1700" />
+          <Picker.Item label="17:15" value="1715" />
+          <Picker.Item label="17:30" value="1730" />
+          <Picker.Item label="17:45" value="1745" />
+        </Picker>
+        <View style={styles.row}>
+        <ThemeProvider theme={theme}>
+          <SafeAreaView style={{ flex: 1 }}>
+            <Div row alignItems="center" justifyContent="center" flexDir="row" mt="xl">
+            <Button bg="shimmygreen" h={40} w={40}  ml="md" rounded="circle">S</Button>
+            <Button bg="shimmygreen" h={40} w={40}  ml="md" rounded="circle">M</Button>
+            <Button bg="shimmygreen" h={40} w={40}  ml="md" rounded="circle">T</Button>
+            <Button bg="shimmygreen" h={40} w={40}  ml="md" rounded="circle">W</Button>
+            <Button bg="shimmygreen" h={40} w={40}  ml="md" rounded="circle">T</Button>
+            <Button bg="shimmygreen" h={40} w={40}  ml="md" rounded="circle">F</Button>
+            <Button bg="shimmygreen" h={40} w={40} ml="md" rounded="circle">S</Button>
+            </Div>
+          </SafeAreaView>
+        </ThemeProvider>
+      </View>
+          <Pressable 
+            style={styles.button}
+            onPress={() => {
+              // for each day selected, add shimmy times to cloud
+                navigation.navigate('Home');
+            }}>
+                <Text style={styles.buttonText}>Next</Text>
+            </Pressable>
     </View>
-    );
-}
+  )};
+};
+
 export default Time;

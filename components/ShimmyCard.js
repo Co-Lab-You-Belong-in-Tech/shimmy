@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
     },
     backRightBtn: {
-        borderRadius: 20,
         alignItems: 'center',
         bottom: 0,
         justifyContent: 'center',
@@ -144,6 +143,8 @@ const styles = StyleSheet.create({
         right: 75,
     },
     backRightBtnRight: {
+        borderTopEndRadius: 20,
+        borderBottomEndRadius: 20,
         backgroundColor: 'red',
         right: 0,
     },
