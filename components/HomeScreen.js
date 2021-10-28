@@ -12,16 +12,40 @@ import {
 	Baloo2_400Regular,
 	Baloo2_600SemiBold,
 } from "@expo-google-fonts/baloo-2";
+import {
+	Montserrat_100Thin,
+	Montserrat_100Thin_Italic,
+	Montserrat_200ExtraLight,
+	Montserrat_200ExtraLight_Italic,
+	Montserrat_300Light,
+	Montserrat_300Light_Italic,
+	Montserrat_400Regular,
+	Montserrat_400Regular_Italic,
+	Montserrat_500Medium,
+	Montserrat_500Medium_Italic,
+	Montserrat_600SemiBold,
+	Montserrat_600SemiBold_Italic,
+	Montserrat_700Bold,
+	Montserrat_700Bold_Italic,
+	Montserrat_800ExtraBold,
+	Montserrat_800ExtraBold_Italic,
+	Montserrat_900Black,
+	Montserrat_900Black_Italic,
+} from "@expo-google-fonts/montserrat";
+import { Icon } from "react-native-elements";
+import ShimmyCard from "./ShimmyCard";
 import DaySelector from "./DaySelector";
 
 const HomeScreen = ({ navigation }) => {
 	navigation.setOptions({
+		headerShow: false,
 		headerLeft: () => null,
 	});
 
 	let [fontsLoaded] = useFonts({
 		Baloo2_400Regular,
 		Baloo2_600SemiBold,
+		Montserrat_600SemiBold,
 	});
 
 	function HomeScreen() {
@@ -44,13 +68,20 @@ const HomeScreen = ({ navigation }) => {
 						Shimmy
 					</Text>
 					<DaySelector />
-					<Text>Home screen will include...</Text>
-					<Text>Weekly progress bar</Text>
-					<Text>Schedule view</Text>
-					<Text>Start the shimmy time</Text>
-					<Pressable onPress={() => navigation.navigate("Shimmytime")}>
-						<Text>Test</Text>
-					</Pressable>
+					<Text
+						style={{
+							fontFamily: "Montserrat_600SemiBold",
+							fontSize: 16,
+							lineHeight: 24,
+						}}
+					>
+						Today's schedule:
+					</Text>
+					<ShimmyCard>
+						<Pressable onPress={() => navigation.navigate("Shimmytime")}>
+							<Text>Test</Text>
+						</Pressable>
+					</ShimmyCard>
 				</View>
 			);
 		}
@@ -84,57 +115,53 @@ const HomeScreen = ({ navigation }) => {
 
 	return (
 		<Tab.Navigator
-			screenOptions={({ route }) => ({
-				tabBarIcon: ({ focused, color, size }) => {
-					if (route.name === "Home") {
-						return (
-							<Ionicons
-								name={
-									focused
-										? "ios-information-circle"
-										: "ios-information-circle-outline"
-								}
-								size={size}
-								color={color}
-							/>
-						);
-					} else if (route.name === "Settings") {
-						return (
-							<Ionicons
-								name={focused ? "ios-list-box" : "ios-list"}
-								size={size}
-								color={color}
-							/>
-						);
-					}
-				},
-				tabBarInactiveTintColor: "gray",
-				tabBarActiveTintColor: "tomato",
-			})}
+			initialRouteName='Home'
+			activeColor='#fff'
+			tabBarOptions={customTabBarStyle}
+			shifting='false'
 		>
 			<Tab.Screen
 				name='Home'
 				options={{
-					cardStyle: { backgroundColor: "#FFEBAF" },
-					headerTitle: "",
-					headerTransparent: true,
-					headerStyle: {
-						borderBottomWidth: 0,
-					},
+					tabBarLabel: "",
+					tabBarIcon: ({ color }) => (
+						<Icon name='home' color={color} size={26} />
+					),
 				}}
 				component={HomeScreen}
 			/>
 			<Tab.Screen
-				name='Settings'
+				name='Add'
 				options={{
-					cardStyle: { backgroundColor: "#FFEBAF" },
-					headerTitle: "",
-					headerTransparent: true,
-					headerStyle: {
-						borderBottomWidth: 0,
-					},
+					tabBarLabel: "",
+					tabBarIcon: ({ color }) => (
+						<View
+							style={{
+								position: "absolute",
+								bottom: 20, // space from bottombar
+								height: 56,
+								width: 56,
+								borderRadius: 56,
+								color: "#15999B",
+								justifyContent: "center",
+								alignItems: "center",
+							}}
+						>
+							<Icon name='add-circle' color='#15999B' size={68} />
+						</View>
+					),
 				}}
-				component={SettingsScreen}
+				component={HomeScreen}
+			/>
+			<Tab.Screen
+				name='Profile'
+				options={{
+					tabBarLabel: "",
+					tabBarIcon: ({ color }) => (
+						<Icon name='insights' color={color} size={26} />
+					),
+				}}
+				component={HomeScreen}
 			/>
 		</Tab.Navigator>
 	);
@@ -180,5 +207,11 @@ const styles = StyleSheet.create({
 		color: "white",
 	},
 });
+const customTabBarStyle = {
+	height: 84,
+	activeTintColor: "#0091EA",
+	inactiveTintColor: "gray",
+	style: { backgroundColor: "white" },
+};
 
 export default HomeScreen;

@@ -7,45 +7,26 @@ import {
 	TouchableOpacity,
 	Pressable,
 } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import { Picker } from "@react-native-picker/picker";
 import firebase from "../firebase";
 import {
 	useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold,
 } from "@expo-google-fonts/baloo-2";
+import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
+import {
+	Div,
+	ThemeProvider,
+	Button,
+	Input,
+	Icon,
+	Image,
+} from "react-native-magnus";
 
 const Time = ({ navigation }) => {
-	const [date, setDate] = useState(new Date(1598051730000));
-	const [mode, setMode] = useState("date");
-	const [show, setShow] = useState(false);
-
-	const onChange = (event, selectedDate) => {
-		const currentDate = selectedDate || date;
-		setShow(Platform.OS === "ios");
-		setDate(currentDate);
-	};
-
-	const showMode = (currentMode) => {
-		setShow(true);
-		setMode(currentMode);
-	};
-
-	const showDatepicker = () => {
-		showMode("date");
-	};
-
-	const showTimepicker = () => {
-		showMode("time");
-	};
-
-	const buttonClickedHandler = (value) => {
-		const dateRef = firebase.database().ref("date");
-		const date = {
-			date: value,
-		};
-		dateRef.push(date);
-	};
+	const [daysArray, setDaysArray] = useState([]);
+	const [time, setTime] = useState(false);
 
 	const styles = StyleSheet.create({
 		headertext: {
@@ -53,13 +34,11 @@ const Time = ({ navigation }) => {
 			lineHeight: 30,
 			fontFamily: "Baloo2_400Regular",
 		},
-
 		subtext: {
 			fontSize: 16,
 			lineHeight: 24,
 			fontFamily: "Montserrat_400Regular",
 		},
-
 		container: {
 			backgroundColor: "#FFEBAF",
 			flex: 1,
@@ -117,6 +96,12 @@ const Time = ({ navigation }) => {
 		Montserrat_400Regular,
 	});
 
+	const theme = {
+		colors: {
+			shimmygreen: "#076264",
+		},
+	};
+
 	if (!fontsLoaded) {
 		return <AppLoading />;
 	} else {
@@ -126,92 +111,32 @@ const Time = ({ navigation }) => {
 					When would you like to have shimmy time?
 				</Text>
 				<Text style={styles.subtext}>This is a 1 minute movement break.</Text>
-				<Pressable style={styles.timeButton} onPress={showTimepicker}>
-					<Text style={styles.buttonText}>Select a Time</Text>
-				</Pressable>
+				<Picker
+					selectedValue={time}
+					onValueChange={(value) => setTime(value)}
+					mode='dropdown' // Android only
+					style={styles.picker}
+				>
+					<Picker.Item label='09:00' value='09:00' />
+					<Picker.Item label='09:30' value='09:30' />
+					<Picker.Item label='10:30' value='10:30' />
+					<Picker.Item label='11:00' value='11:00' />
+				</Picker>
 				<View style={styles.row}>
-					<DateTimePicker
-						testID='dateTimePicker'
-						display='spinner'
-						value={date}
-						mode={mode}
-						is24Hour={true}
-						onChange={onChange}
-					/>
-					<TouchableOpacity
-						onPress={() => {
-							let value = "Sunday";
-							buttonClickedHandler(value);
-						}}
-						style={styles.roundButton}
-					>
-						<Text style={styles.buttonText}>S</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity
-						onPress={() => {
-							let value = "Monday";
-							buttonClickedHandler(value);
-						}}
-						style={styles.roundButton}
-					>
-						<Text style={styles.buttonText}>M</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity
-						onPress={() => {
-							let value = "Tuesday";
-							buttonClickedHandler(value);
-						}}
-						style={styles.roundButton}
-					>
-						<Text style={styles.buttonText}>T</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity
-						onPress={() => {
-							let value = "Wednesday";
-							buttonClickedHandler(value);
-						}}
-						style={styles.roundButton}
-					>
-						<Text style={styles.buttonText}>W</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity
-						onPress={() => {
-							let value = "Thursday";
-							buttonClickedHandler(value);
-						}}
-						style={styles.roundButton}
-					>
-						<Text style={styles.buttonText}>T</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity
-						onPress={() => {
-							let value = "Friday";
-							buttonClickedHandler(value);
-						}}
-						style={styles.roundButton}
-					>
-						<Text style={styles.buttonText}>F</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity
-						onPress={() => {
-							let value = "Saturday";
-							buttonClickedHandler(value);
-						}}
-						style={styles.roundButton}
-					>
-						<Text style={styles.buttonText}>S</Text>
-					</TouchableOpacity>
+					<ThemeProvider theme={theme}>
+						<Button bg='shimmygreen' />
+						<Button bg='shimmygreen' />
+						<Button bg='shimmygreen' />
+						<Button bg='shimmygreen' />
+						<Button bg='shimmygreen' />
+						<Button bg='shimmygreen' />
+						<Button bg='shimmygreen' />
+					</ThemeProvider>
 				</View>
-				<View></View>
 				<Pressable
 					style={styles.button}
 					onPress={() => {
+						// for each day selected, add shimmy times to cloud
 						navigation.navigate("Home");
 					}}
 				>

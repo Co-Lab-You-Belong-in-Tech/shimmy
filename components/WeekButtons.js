@@ -2,7 +2,6 @@ import * as React from 'react';
 import { ToggleButton } from 'react-native-paper';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
-
 const WeekButtons = () => {
     
   const [status, setStatus] = React.useState('checked');
