@@ -1,6 +1,4 @@
 import firebase from 'firebase';
-import 'firebase/database';
-import "firebase/firestore";
 import uuid from 'react-native-uuid';
 
 const firebaseConfig = {
@@ -23,21 +21,26 @@ const decrement = firebase.firestore.FieldValue.increment(-1);
 
 
 // Creates shimmy.
-export async function createShimmy(uid, schedule){
-  const snapshot = await db
-    .collection("schedules")
-    .doc(uid)
-    .set(schedule);
-  return console.log(snapshot)
-}
+export async function createShimmy(uid, time, days){
+  days.map((day) => {
+     let genid = uuid.v4()
+     db.collection("schedules")
+     .doc(uid)
+     .set(
+     {[day]: {
+       scheduled: time,
+       is_active: true,
+       shimmy_id: genid
+      }
+     }, {merge: true})
+   });
+ }
 
 // Returns shimmys.
 export async function getShimmy(uid){
-  const snapshot = await db
-    .collection("schedules")
-    .where("uid", "==", uid)
-    .get();
-  return snapshot.docs.map((doc) => (console.log({ id: doc.id, ...doc.data() })));
+  const shimmys = await db.collection("schedules").doc(uid).get();
+  console.log("Document data:", shimmys.data());
+  return shimmys;
 }
 
 // Selects and edits shimmy.
