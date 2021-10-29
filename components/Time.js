@@ -93,7 +93,7 @@ const Time = ({navigation}) => {
         // Background Linear Gradient
         //background: linear-gradient(167.96deg, #FFD5A0 9.37%, #FFEBAF 50%, #B6E8E9 90.1%);
         colors={['#FFD5A0', '#FFEBAF', '#B6E8E9']}
-        start={{ x: -1, y: 1}}
+        start={{ x: -1, y: 0 }}
         style={styles.background}
       />
       <Text style={styles.headertext}>
