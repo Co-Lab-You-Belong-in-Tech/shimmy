@@ -19,7 +19,6 @@ const db = firebase.firestore();
 const increment = firebase.firestore.FieldValue.increment(1);
 const decrement = firebase.firestore.FieldValue.increment(-1);
 
-
 // Creates shimmy.
 export async function createShimmy(uid, time, days){
   days.map((day) => {

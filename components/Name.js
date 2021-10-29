@@ -10,7 +10,6 @@ import AppLoading from 'expo-app-loading';
 const Name = ({navigation}) => {
   const [text, setText] = useState('')
 
-  db.getShimmy("2424")
   navigation.setOptions({
     headerRight:() => (
       <Pressable onPress={() => navigation.navigate('Time')}>
