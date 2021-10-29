@@ -66,6 +66,7 @@ const ShimmyCard = () => {
         <TouchableHighlight
             onPress={() => console.log('pressed')}
             style={styles.rowCompletedFront}
+            underlayColor={'#FAF9F6'}
         >
         <View style={{ alignContent: 'center', justifyContent: 'center' }}>
             <Text style={{ marginLeft: 135, alignContent: 'center', justifyContent: 'center' }}> <Ionicons name="ios-checkmark-circle-outline" size={30} color="white" /> </Text>
