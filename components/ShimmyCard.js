@@ -10,8 +10,7 @@ import {
 	useFonts,
 	Montserrat_500Medium,
 	Montserrat_600SemiBold } from '@expo-google-fonts/montserrat';
-import { Feather } from '@expo/vector-icons'; 
-import { FontAwesome5 } from '@expo/vector-icons'; 
+import { FontAwesome5, Ionicons, Feather } from '@expo/vector-icons'; 
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { useNavigation } from '@react-navigation/native';
 
@@ -63,7 +62,17 @@ const ShimmyCard = () => {
         </View>
         </TouchableHighlight>
     );
-    
+    const renderCompletedItem = (data) => (
+        <TouchableHighlight
+            onPress={() => console.log('pressed')}
+            style={styles.rowCompletedFront}
+        >
+        <View style={{ alignContent: 'center', justifyContent: 'center' }}>
+            <Text style={{ marginLeft: 135, alignContent: 'center', justifyContent: 'center' }}> <Ionicons name="ios-checkmark-circle-outline" size={30} color="white" /> </Text>
+        </View>
+        </TouchableHighlight>
+    );
+
     // Renders Edit, Delete for Shimmytimes
     const renderHiddenItem = (data, rowMap) => (
         <View style={styles.rowBack}>
@@ -98,6 +107,17 @@ const ShimmyCard = () => {
                 previewOpenDelay={3000}
                 onRowDidOpen={onRowDidOpen}
             />
+            <SwipeListView
+                data={listData}
+                keyExtractor={item => item.id}
+                renderItem={renderCompletedItem}
+                leftOpenValue={75}
+                rightOpenValue={-150}
+                previewRowKey={'0'}
+                previewOpenValue={-40}
+                previewOpenDelay={3000}
+                onRowDidOpen={onRowDidOpen}
+            />
         </View>
     </View>
     );
@@ -112,12 +132,16 @@ const styles = StyleSheet.create({
     backTextWhite: {
         color: 'black',
     },
-		rowLeft: {
-
-		},
     rowFront: {
         borderRadius: 20,
         backgroundColor: '#B6E8E9',
+        justifyContent: 'center',
+        marginBottom: 10,
+        height: 64,
+    },
+    rowCompletedFront: {
+        borderRadius: 20,
+        backgroundColor: '#076264',
         justifyContent: 'center',
         marginBottom: 10,
         height: 64,
