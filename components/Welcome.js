@@ -5,13 +5,17 @@ import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold
   } from '@expo-google-fonts/baloo-2';
+import { 
+	Montserrat_400Regular,
+	Montserrat_600SemiBold } from '@expo-google-fonts/montserrat';
 import SvgComponent from './SvgComponent';
-import * as db from '../firebase'
+import { LinearGradient } from 'expo-linear-gradient';
 
 const Welcome = ({navigation}) => {
 	let [fontsLoaded] = useFonts({
 		Baloo2_400Regular,
-		Baloo2_600SemiBold
+		Baloo2_600SemiBold,
+		Montserrat_400Regular,
 	});
 
 	if (!fontsLoaded) {
@@ -19,8 +23,13 @@ const Welcome = ({navigation}) => {
 	} else {
 	return (
 		<View style={styles.container}>
+			      <LinearGradient
+        colors={['#FFD5A0', '#FFEBAF', '#B6E8E9']}
+        start={{ x: -1, y: 0 }}
+        style={styles.background}
+      />
 			<Text style={styles.headertext}>Welcome to</Text>
-			<Text style={{fontFamily: 'Baloo2_600SemiBold', fontSize: 90}}>Shimmy</Text>
+			<Text style={{fontFamily: 'Baloo2_600SemiBold', fontSize: 90}}>shimmy</Text>
 			<SvgComponent />
 			<Text style={styles.tagline}>Sit less, move more</Text>
 			<Pressable 
@@ -41,6 +50,15 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		fontFamily: 'Baloo2_400Regular'
 	},
+	background: {
+		position: 'absolute',
+		zIndex: -1, // works on ios
+		elevation: -1, // works on android
+		left: 0,
+		right: 0,
+		top: 0,
+		height: 1000,
+	},
 	button: {
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -52,13 +70,16 @@ const styles = StyleSheet.create({
 		width: 200
 	},
 	text: {
+		fontFamily: 'Montserrat_400Regular',
 		fontSize: 16,
-		lineHeight: 21,
+		fontWeight: 500,
+		lineHeight: 24,
 		fontWeight: 'bold',
-		letterSpacing: 0.25,
+		letterSpacing: "-0.02em",
 		color: 'white',
 	},
 	headertext: {
+		letterSpacing: '-0.02em',
 		fontSize: 26,
 		lineHeight: 30,
 		fontFamily: 'Baloo2_400Regular'
@@ -67,7 +88,9 @@ const styles = StyleSheet.create({
 		fontSize: 26,
 		padding: 20,
 		lineHeight: 30,
-		fontFamily: 'Baloo2_400Regular'
+		fontWeight: 400,
+		fontFamily: 'Baloo2_400Regular',
+		letterSpacing: '-0.02em'
 	}
 })
 

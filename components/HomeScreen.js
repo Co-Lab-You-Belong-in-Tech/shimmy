@@ -20,6 +20,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as db from '../firebase'
 import ShimmyCard from './ShimmyCard';
 import DaySelector from './DaySelector';
+import TestModal from './TestModal';
 
 const HomeScreen = ({navigation}) => {
   navigation.setOptions({
@@ -41,6 +42,7 @@ const HomeScreen = ({navigation}) => {
         <View style={{ padding: 40 }}></View>
         <DaySelector />
         <ShimmyCard />
+        <TestModal />
       </View>
     );
   }};

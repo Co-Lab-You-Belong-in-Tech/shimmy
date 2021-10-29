@@ -6,6 +6,7 @@ import { useFonts,
 	Baloo2_600SemiBold
   } from '@expo-google-fonts/baloo-2';
 import AppLoading from 'expo-app-loading';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const Name = ({navigation}) => {
   const [text, setText] = useState('')
@@ -27,14 +28,21 @@ const Name = ({navigation}) => {
 	} else {
     return (
       <View style={styles.container}>
+        <LinearGradient
+          colors={['#FFD5A0', '#FFEBAF', '#B6E8E9']}
+          start={{ x: -1, y: 0 }}
+          style={styles.background}
+         />
         <Text style={styles.headertext}>What's your name?</Text>
         <TextInput
             style={{
-                height: 40,
-                borderColor: 'gray',
-                borderWidth: 1,
-                marginVertical: 20,
-                padding: 10
+              height: 44,
+              width: 300,
+              top: 24,
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              border: "1px solid #687273",
+              borderRadius: 10,
+              margin: 20,
             }}
             onChangeText={text => setText(text)}
             defaultValue={text}
@@ -71,7 +79,7 @@ const styles = StyleSheet.create({
 		borderRadius: 25,
 		elevation: 3,
 		backgroundColor: '#15999B',
-		width: 200
+    width: 300,
 	},
   buttonText: {
     fontSize: 16,
@@ -79,6 +87,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     letterSpacing: 0.25,
     color: 'white',
-    }
+    },
+  background: {
+    position: 'absolute',
+    zIndex: -1, // works on ios
+    elevation: -1, // works on android
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 1000,
+  }
 })
 export default Name;
