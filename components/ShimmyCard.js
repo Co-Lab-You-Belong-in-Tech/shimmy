@@ -10,6 +10,8 @@ import {
 	useFonts,
 	Montserrat_500Medium,
 	Montserrat_600SemiBold } from '@expo-google-fonts/montserrat';
+import { Feather } from '@expo/vector-icons'; 
+import { FontAwesome5 } from '@expo/vector-icons'; 
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,7 +20,7 @@ const ShimmyCard = () => {
     
     // TODO Firebase call for scheduled Shimmytimes.
     const [listData, setListData] = useState(
-        Array(3)
+        Array(2)
           .fill('')
     );
 
@@ -69,13 +71,13 @@ const ShimmyCard = () => {
                 style={[styles.backRightBtn, styles.backRightBtnLeft]}
                 onPress={() => closeRow(rowMap, data.item.key)}
             >
-                <Text style={styles.backTextWhite}>Edit</Text>
+                <Feather name="edit" size={24} color="white" />
             </TouchableOpacity>
             <TouchableOpacity
                 style={[styles.backRightBtn, styles.backRightBtnRight]}
                 onPress={() => deleteRow(rowMap, data.item.key)}
             >
-                <Text style={styles.backTextWhite}>Delete</Text>
+                <FontAwesome5 name="trash-alt" size={24} color="white" />
             </TouchableOpacity>
         </View>
     );
