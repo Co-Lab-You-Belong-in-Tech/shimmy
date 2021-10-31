@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AppLoading from 'expo-app-loading';
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Pressable } from 'react-native';
+import { Dimensions, View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Pressable } from 'react-native';
 import { Picker } from "@react-native-picker/picker";
 import { useFonts,
 	Baloo2_400Regular,
@@ -9,6 +9,9 @@ import { useFonts,
 import { Montserrat_400Regular } from '@expo-google-fonts/montserrat';
 import { Div, ThemeProvider, Button, Input, Icon, Image } from 'react-native-magnus';
 import { LinearGradient } from 'expo-linear-gradient';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const Time = ({navigation}) => {
   const [daysArray, setDaysArray] = useState([]);
@@ -68,8 +71,8 @@ const Time = ({navigation}) => {
       left: 0,
       right: 0,
       top: 0,
-      height: 1000,
-    }
+      height: windowHeight,
+    },
 });
 
   let [fontsLoaded] = useFonts({

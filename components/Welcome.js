@@ -1,6 +1,6 @@
 import React from 'react';
 import AppLoading from 'expo-app-loading';
-import { View, Text, Pressable, StyleSheet} from 'react-native';
+import { View, Text, Pressable, StyleSheet, Dimensions } from 'react-native';
 import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold
@@ -10,6 +10,9 @@ import {
 	Montserrat_600SemiBold } from '@expo-google-fonts/montserrat';
 import SvgComponent from './SvgComponent';
 import { LinearGradient } from 'expo-linear-gradient';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const Welcome = ({navigation}) => {
 	let [fontsLoaded] = useFonts({
@@ -25,7 +28,7 @@ const Welcome = ({navigation}) => {
 		<View style={styles.container}>
 			      <LinearGradient
         colors={['#FFD5A0', '#FFEBAF', '#B6E8E9']}
-        start={{ x: -1, y: 0 }}
+        start={{ x: -1, y: 0.1 }}
         style={styles.background}
       />
 			<Text style={styles.headertext}>Welcome to</Text>
@@ -57,7 +60,7 @@ const styles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		top: 0,
-		height: 1000,
+		height: windowHeight,
 	},
 	button: {
 		alignItems: 'center',
