@@ -23,6 +23,7 @@ import DaySelector from './DaySelector';
 import TestModal from './TestModal';
 
 const HomeScreen = ({navigation}) => {
+ 
   navigation.setOptions({
     headerShown: false,
   })
