@@ -10,6 +10,11 @@
       "StackName": "amplify-shimmy-dev-130828",
       "StackId": "arn:aws:cloudformation:us-east-1:690909774476:stack/amplify-shimmy-dev-130828/7ff8bdf0-3bff-11ec-bf79-0e32a9cf0129",
       "AmplifyAppId": "d3ncamnx3dvwf2"
+    },
+    "categories": {
+      "auth": {
+        "shimmy9ac4c650": {}
+      }
     }
   }
 }
