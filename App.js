@@ -8,6 +8,10 @@ import Time from './components/Time';
 import HomeScreen from './components/HomeScreen';
 import ShimmyTime from './components/ShimmyTime';
 import ShimmyCard from './components/ShimmyCard';
+// AWS configuration
+import Amplify from '@aws-amplify/core';
+import config from './aws-exports'
+Amplify.configure(config);
 
 const Stack = createNativeStackNavigator();
 

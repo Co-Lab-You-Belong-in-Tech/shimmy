@@ -10,6 +10,7 @@ import {
 	Montserrat_600SemiBold } from '@expo-google-fonts/montserrat';
 import SvgComponent from './SvgComponent';
 import { LinearGradient } from 'expo-linear-gradient';
+import Login from './Login'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -41,6 +42,7 @@ const Welcome = ({navigation}) => {
 			>
 				<Text style={styles.text}>Get Started</Text>    
 			</Pressable>
+			<Login />
 		</View>
 	)
 }};
