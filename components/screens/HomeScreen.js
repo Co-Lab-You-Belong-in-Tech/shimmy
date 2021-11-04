@@ -22,6 +22,7 @@ import ShimmyCard from '../ShimmyCard';
 import DaySelector from '../DaySelector';
 import TestModal from '../TestModal';
 import InsightsCounter from '../InsightsCounter';
+import InsightsScreen from './InsightsScreen';
 
 const HomeScreen = ({navigation}) => {
  
@@ -115,7 +116,7 @@ const HomeScreen = ({navigation}) => {
           <Icon name="insights" color={color} size={26} />
       )
   }}
-  component={HomeScreen} />
+  component={InsightsScreen} />
   </Tab.Navigator>
   );
 }
