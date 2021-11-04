@@ -8,13 +8,13 @@ import { useFonts,
 import { 
 	Montserrat_400Regular,
 	Montserrat_600SemiBold } from '@expo-google-fonts/montserrat';
-import SvgComponent from './SvgComponent';
+import SvgComponent from '../SvgComponent';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const Welcome = ({navigation}) => {
+const WelcomeScreen = ({navigation}) => {
 	let [fontsLoaded] = useFonts({
 		Baloo2_400Regular,
 		Baloo2_600SemiBold,
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
 	}
 })
 
-export default Welcome;
+export default WelcomeScreen;

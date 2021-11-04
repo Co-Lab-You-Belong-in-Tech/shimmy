@@ -17,10 +17,11 @@ import { useFonts,
 	Baloo2_600SemiBold
   } from '@expo-google-fonts/baloo-2';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import * as db from '../firebase'
-import ShimmyCard from './ShimmyCard';
-import DaySelector from './DaySelector';
-import TestModal from './TestModal';
+import * as db from '../../firebase'
+import ShimmyCard from '../ShimmyCard';
+import DaySelector from '../DaySelector';
+import TestModal from '../TestModal';
+import InsightsCounter from '../InsightsCounter';
 
 const HomeScreen = ({navigation}) => {
  
@@ -42,6 +43,7 @@ const HomeScreen = ({navigation}) => {
         <Text style={{ position: 'absolute', top: 20, fontFamily: 'Baloo2_600SemiBold', fontSize: 29, lineHeight: 40, height: 10 }}>Shimmy</Text>
         <View style={{ padding: 40 }}></View>
         <DaySelector />
+        <InsightsCounter />
         <ShimmyCard />
         <TestModal />
       </View>

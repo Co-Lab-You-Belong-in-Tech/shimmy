@@ -2,19 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Dimensions, View, Text, StyleSheet, Image } from 'react-native';
 import { HeaderBackButton } from '@react-navigation/elements';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
-import AudioPlayer from './AudioPlayer';
+import AudioPlayer from '../AudioPlayer';
 import { LinearGradient } from 'expo-linear-gradient';
-import Ring from './Ring';
+import Ring from '../Ring';
 import { useFonts,
 Baloo2_500Medium,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold
   } from '@expo-google-fonts/baloo-2';
 
-  const windowHeight = Dimensions.get('window').height;
+const windowHeight = Dimensions.get('window').height;
 
-
-const Shimmytime = ({navigation}) => {
+const ShimmyScreen = ({navigation}) => {
   const [isPlaying, setIsPlaying] = useState(true);
 
   navigation.setOptions({
@@ -43,7 +42,7 @@ const Shimmytime = ({navigation}) => {
       </View>
       <View style={{ position: 'absolute', alignItems: 'center' }}>
       <Ring size={300} style={{ position: 'absolute', alignItems: 'center' }}/>
-     <Image source={require('../assets/shimmydancer.gif')} style={{ position: 'absolute', top: 70, alignItems: 'center', zIndex: 1, width: 180, height: 180 }} />
+     <Image source={require('../../assets/shimmydancer.gif')} style={{ position: 'absolute', top: 70, alignItems: 'center', zIndex: 1, width: 180, height: 180 }} />
       <CountdownCircleTimer
           isPlaying={isPlaying}
           duration={60}
@@ -91,4 +90,5 @@ const styles = StyleSheet.create({
 		height: windowHeight,
 	},
   });
-export default Shimmytime;
+
+export default ShimmyScreen;

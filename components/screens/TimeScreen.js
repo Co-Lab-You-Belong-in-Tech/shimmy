@@ -13,7 +13,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const Time = ({navigation}) => {
+const TimeScreen = ({navigation}) => {
   const [daysArray, setDaysArray] = useState([]);
   const [time, setTime] = useState(false);
 
@@ -166,4 +166,4 @@ const Time = ({navigation}) => {
   )};
 };
 
-export default Time;
+export default TimeScreen;

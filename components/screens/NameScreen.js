@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextInput, View, Text, Pressable, StyleSheet, Dimensions } from 'react-native';
-import * as db from '../firebase';
+import * as db from '../../firebase';
 import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold
@@ -11,7 +11,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const Name = ({navigation}) => {
+const NameScreen = ({navigation}) => {
   const [text, setText] = useState('')
 
   navigation.setOptions({
@@ -100,4 +100,4 @@ const styles = StyleSheet.create({
     color: 'white',
     },
 })
-export default Name;
+export default NameScreen;
