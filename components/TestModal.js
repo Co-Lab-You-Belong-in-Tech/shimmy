@@ -18,9 +18,10 @@ export default class TestModal extends Component {
   }
 
   render() {
-    return (
-      <View style = { styles.container }>
-        <Modal
+    return ( 
+      <View>
+          <Modal
+            style={styles.modalView}
             animationType = {"slide"}
             transparent={false}
             visible={this.state.isVisible}
@@ -41,9 +42,9 @@ export default class TestModal extends Component {
                 this.displayModal(true);
               }}>
               <Text style={styles.buttonText}>Show Modal</Text>
-          </TouchableOpacity>          
-        </View>
-      );
+          </TouchableOpacity>     
+      </View>     
+    )
   }
 };
 
@@ -85,19 +86,20 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 25,
   },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 22,
-  },
-  image: {
-    marginTop: 150,
-    marginBottom: 10,
-    width: '100%',
-    height: 350,
-  },
-  text: {
-    fontSize: 24,
-    marginBottom: 30,
-    padding: 40,
-  }
+  modalView: {
+    margin: 0,
+    justifyContent: 'flex-end'
+    },
+    containerStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'flex-end'
+    },
+    content: {
+    width: '95%',
+    height: '50%',
+    backgroundColor: 'white',
+    overflow: 'hidden',
+    },
 });

@@ -2,7 +2,6 @@ import * as React from 'react';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements'
-import { Ionicons } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
 import {
   Pressable,
@@ -16,8 +15,6 @@ import { useFonts,
 	Baloo2_400Regular,
 	Baloo2_600SemiBold
   } from '@expo-google-fonts/baloo-2';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import * as db from '../../firebase'
 import ShimmyCard from '../ShimmyCard';
 import DaySelector from '../DaySelector';
 import TestModal from '../TestModal';
