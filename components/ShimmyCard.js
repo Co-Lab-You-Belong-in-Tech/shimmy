@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     StyleSheet,
     Text,
@@ -10,6 +10,7 @@ import {
 	useFonts,
 	Montserrat_500Medium,
 	Montserrat_600SemiBold } from '@expo-google-fonts/montserrat';
+import { FontAwesome5, Ionicons, Feather } from '@expo/vector-icons'; 
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,7 +19,7 @@ const ShimmyCard = () => {
     
     // TODO Firebase call for scheduled Shimmytimes.
     const [listData, setListData] = useState(
-        Array(3)
+        Array(2)
           .fill('')
     );
 
@@ -54,14 +55,25 @@ const ShimmyCard = () => {
             underlayColor={'#FAF9F6'}
         >
         <View>
-          <Text style={{  marginLeft: 20, fontFamily: 'Montserrat_600SemiBold', whiteSpace: "pre-line" }}>2PM    <View>
+          <Text style={{  marginLeft: 20, fontFamily: 'Montserrat_600SemiBold', whiteSpace: "pre-line" }}>{ Math.floor(Math.random() * 4)}PM    <View>
               <Text style={{ marginLeft: 30, fontFamily: 'Montserrat_500Medium'}}>{'     Shimmy Time'}
               </Text></View>
             </Text>
         </View>
         </TouchableHighlight>
     );
-    
+    const renderCompletedItem = (data) => (
+        <TouchableHighlight
+            onPress={() => console.log('pressed')}
+            style={styles.rowCompletedFront}
+            underlayColor={'#FAF9F6'}
+        >
+        <View style={{ alignContent: 'center', justifyContent: 'center' }}>
+            <Text style={{ marginLeft: 135, alignContent: 'center', justifyContent: 'center' }}> <Ionicons name="ios-checkmark-circle-outline" size={30} color="white" /> </Text>
+        </View>
+        </TouchableHighlight>
+    );
+
     // Renders Edit, Delete for Shimmytimes
     const renderHiddenItem = (data, rowMap) => (
         <View style={styles.rowBack}>
@@ -69,13 +81,13 @@ const ShimmyCard = () => {
                 style={[styles.backRightBtn, styles.backRightBtnLeft]}
                 onPress={() => closeRow(rowMap, data.item.key)}
             >
-                <Text style={styles.backTextWhite}>Edit</Text>
+                <Feather name="edit" size={24} color="white" />
             </TouchableOpacity>
             <TouchableOpacity
                 style={[styles.backRightBtn, styles.backRightBtnRight]}
                 onPress={() => deleteRow(rowMap, data.item.key)}
             >
-                <Text style={styles.backTextWhite}>Delete</Text>
+                <FontAwesome5 name="trash-alt" size={24} color="white" />
             </TouchableOpacity>
         </View>
     );
@@ -89,6 +101,17 @@ const ShimmyCard = () => {
                 keyExtractor={item => item.id}
                 renderItem={renderItem}
                 renderHiddenItem={renderHiddenItem}
+                leftOpenValue={75}
+                rightOpenValue={-150}
+                previewRowKey={'0'}
+                previewOpenValue={-40}
+                previewOpenDelay={3000}
+                onRowDidOpen={onRowDidOpen}
+            />
+            <SwipeListView
+                data={listData}
+                keyExtractor={item => item.id}
+                renderItem={renderCompletedItem}
                 leftOpenValue={75}
                 rightOpenValue={-150}
                 previewRowKey={'0'}
@@ -110,9 +133,6 @@ const styles = StyleSheet.create({
     backTextWhite: {
         color: 'black',
     },
-		rowLeft: {
-
-		},
     rowFront: {
         borderRadius: 20,
         backgroundColor: '#B6E8E9',
@@ -120,9 +140,18 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         height: 64,
     },
+    rowCompletedFront: {
+        borderRadius: 20,
+        backgroundColor: '#076264',
+        justifyContent: 'center',
+        marginBottom: 10,
+        height: 64,
+    },
     rowBack: {
+        borderRadius: 2,
         alignItems: 'center',
         backgroundColor: 'FAF9F6',
+        marginBottom: 10,
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -137,11 +166,13 @@ const styles = StyleSheet.create({
         width: 75,
     },
     backRightBtnLeft: {
-        backgroundColor: 'FAF9F6',
+        backgroundColor: 'orange',
         right: 75,
     },
     backRightBtnRight: {
-        backgroundColor: 'FAF9F6',
+        borderTopEndRadius: 20,
+        borderBottomEndRadius: 20,
+        backgroundColor: 'red',
         right: 0,
     },
 });

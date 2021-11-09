@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button} from 'react-native';
-import { NavigationContainer, DefaultTheme} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Welcome from './components/Welcome';
-import Name from './components/Name';
-import Time from './components/Time';
-import HomeScreen from './components/HomeScreen';
-import ShimmyTime from './components/ShimmyTime';
+import WelcomeScreen from './components/screens/WelcomeScreen';
+import NameScreen from './components/screens/NameScreen';
+import TimeScreen from './components/screens/TimeScreen';
+import HomeScreen from './components/screens/HomeScreen';
 import ShimmyCard from './components/ShimmyCard';
+import ShimmyScreen from './components/screens/ShimmyScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +18,7 @@ export default function App() {
         <Stack.Screen 
           options={{headerShown: false}} 
           name="Welcome" 
-          component={Welcome}
+          component={WelcomeScreen}
         />
         <Stack.Screen  
           options={{
@@ -30,7 +30,7 @@ export default function App() {
             },
             }}
           name="Name" 
-          component={Name}
+          component={NameScreen}
         />
         <Stack.Screen 
           name="Time" 
@@ -42,7 +42,7 @@ export default function App() {
               borderBottomWidth: 0
             },
             }}
-          component={Time}
+          component={TimeScreen}
         />
         <Stack.Screen 
           name="Home" 
@@ -57,7 +57,7 @@ export default function App() {
           component={HomeScreen}/>
         <Stack.Screen
           name="ShimmyTime"
-          component={ShimmyTime}
+          component={ShimmyScreen}
           options={{
             headerTitle: "shimmy time",
             headerTitleAlign: 'center',
