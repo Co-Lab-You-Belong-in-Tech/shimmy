@@ -20,16 +20,15 @@ const ShimmyScreen = ({navigation}) => {
     headerTransparent: true,
     headerLeft: () => <HeaderBackButton onPress={() => navigation.navigate('Home')}/>
   })
-
   
-	let [fontsLoaded] = useFonts({
+	let fonts = useFonts({
     Baloo2_500Medium,
 		Baloo2_400Regular,
     Baloo2_600SemiBold
 	});
+
   return (
     <View style={styles.container}>
-     
       <LinearGradient
         // Background Linear Gradient
         //background: linear-gradient(167.96deg, #FFD5A0 9.37%, #FFEBAF 50%, #B6E8E9 90.1%);
