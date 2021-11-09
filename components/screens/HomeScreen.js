@@ -41,9 +41,7 @@ const HomeScreen = ({navigation}) => {
         <Text style={{ position: 'absolute', top: 20, fontFamily: 'Baloo2_600SemiBold', fontSize: 29, lineHeight: 40, height: 10 }}>Shimmy</Text>
         <View style={{ padding: 40 }}></View>
         <DaySelector />
-        <InsightsCounter />
         <ShimmyCard />
-        <TestModal />
       </View>
     );
   }};
